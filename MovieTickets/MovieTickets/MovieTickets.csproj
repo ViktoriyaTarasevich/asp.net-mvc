@@ -108,7 +108,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -117,8 +119,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Migrations\201407200554011_CreateDatabase.cs" />
+    <Compile Include="Migrations\201407200554011_CreateDatabase.Designer.cs">
+      <DependentUpon>201407200554011_CreateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Film.cs" />
+    <Compile Include="Models\IpStory.cs" />
+    <Compile Include="Models\MovieTicketContext.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\Seance.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketCategory.cs" />
+    <Compile Include="Models\TicketPrice.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -139,6 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201407200554011_CreateDatabase.resx">
+      <DependentUpon>201407200554011_CreateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

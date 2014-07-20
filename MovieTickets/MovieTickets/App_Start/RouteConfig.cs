@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MovieTickets.App_Start
+namespace MovieTickets
 {
     public class RouteConfig
     {
