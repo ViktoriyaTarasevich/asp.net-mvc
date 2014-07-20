@@ -8,8 +8,8 @@ namespace DataAccess.UnitOfWork
 {
     public class UnitOfWork: IUnitOfWork
     {
-        private readonly DbContext _context;
-        private readonly Dictionary<Type, object> _repositories;
+        private DbContext _context;
+        private Dictionary<Type, object> _repositories;
         private bool _disposed;
 
         public UnitOfWork(DbContext context)
@@ -25,7 +25,13 @@ namespace DataAccess.UnitOfWork
 
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {
-            throw new NotImplementedException();
+            if (this._repositories.Keys.Contains(typeof (TEntity)))
+            {
+                return this._repositories[typeof (TEntity)] as IRepository<TEntity>;
+            }
+            var repository = new Repository<TEntity>(this._context);
+            this._repositories.Add(typeof(TEntity), repository);
+            return repository;
         }
 
         public void Save()
@@ -45,7 +51,10 @@ namespace DataAccess.UnitOfWork
             {
                 if (disposing)
                 {
-                    this._context.Dispose();
+                    if(this._context != null)
+                        this._context.Dispose();
+                    this._context = null;
+                    this._repositories = null;
                 }
 
                 this._disposed = true;

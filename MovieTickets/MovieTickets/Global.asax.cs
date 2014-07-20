@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Web.Mvc;
 using System.Web.Routing;
+using DataAccess;
 using MovieTickets.Models;
 
 namespace MovieTickets
@@ -12,20 +12,7 @@ namespace MovieTickets
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            Database.SetInitializer<MovieTicketContext>(new MigrateDatabaseToLatestVersion<MovieTicketContext,Configuration>());
-        }
-    }
-
-    public sealed class Configuration : DbMigrationsConfiguration<MovieTicketContext>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = true;
-        }
-
-        protected override void Seed(MovieTicketContext context)
-        {
-            base.Seed(context);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MovieTicketContext,MigrationConfiguration<MovieTicketContext>>());
         }
     }
 }
