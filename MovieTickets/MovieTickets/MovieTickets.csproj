@@ -123,6 +123,11 @@
     <Compile Include="Migrations\201407200554011_CreateDatabase.Designer.cs">
       <DependentUpon>201407200554011_CreateDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407210730484_InitialMigrations.cs" />
+    <Compile Include="Migrations\201407210730484_InitialMigrations.Designer.cs">
+      <DependentUpon>201407210730484_InitialMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\IpStory.cs" />
     <Compile Include="Models\MovieTicketContext.cs" />
@@ -160,6 +165,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201407200554011_CreateDatabase.resx">
       <DependentUpon>201407200554011_CreateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407210730484_InitialMigrations.resx">
+      <DependentUpon>201407210730484_InitialMigrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,15 +6,15 @@ using DataAccess.Repository;
 
 namespace DataAccess.UnitOfWork
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork<TContext>: IUnitOfWork where TContext : DbContext, new()
     {
-        private DbContext _context;
+        private TContext _context;
         private Dictionary<Type, object> _repositories;
         private bool _disposed;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork()
         {
-            this._context = context;
+            this._context = new TContext();
             this._repositories = new Dictionary<Type, object>();
         }
 
