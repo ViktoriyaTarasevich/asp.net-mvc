@@ -6,7 +6,10 @@ namespace MovieTickets.ViewModels
     {
         [Required]
         [Display(Name = "Имя")]
-        public string Login { get; set; }
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string SurName { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

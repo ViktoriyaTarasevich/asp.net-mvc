@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MovieTickets.ViewModels
 {
@@ -10,7 +6,10 @@ namespace MovieTickets.ViewModels
     {
         [Required]
         [Display(Name = "Имя")]
-        public string Login { get; set; }
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string SurnName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
