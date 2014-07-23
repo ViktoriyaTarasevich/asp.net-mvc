@@ -20,6 +20,6 @@ namespace MovieTickets.Models
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
 
-        public int UserId { get; set; }
+        public int AspNetUserId { get; set; }
     }
 }

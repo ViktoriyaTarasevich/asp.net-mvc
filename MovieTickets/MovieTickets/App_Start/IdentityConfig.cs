@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using MovieTickets.Models;
 
 namespace MovieTickets.App_Start
 {
@@ -20,7 +23,7 @@ namespace MovieTickets.App_Start
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<MovieTicketContext>()));
      
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
@@ -65,6 +68,14 @@ namespace MovieTickets.App_Start
 
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string SurName { get; set; }
+        public int RoleId { get; set; }
+        public virtual ICollection<IpStory> IpStories { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; } 
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
@@ -72,16 +83,25 @@ namespace MovieTickets.App_Start
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class MovieTicketContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+       
+        public MovieTicketContext()
             : base("MovieTicketContext", throwIfV1Schema: false)
         {
+            
         }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TicketCategory> TicketCategories { get; set; }
+        public DbSet<TicketPrice> TicketPrices { get; set; }
+        public DbSet<Seance> Seances { get; set; }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<Film> Films { get; set; }
+        public DbSet<IpStory> IpStories { get; set; }
 
-        public static ApplicationDbContext Create()
+        public static MovieTicketContext Create()
         {
-            return new ApplicationDbContext();
+            return new MovieTicketContext();
         }
     }
 }

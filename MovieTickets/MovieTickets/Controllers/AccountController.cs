@@ -75,7 +75,7 @@ namespace MovieTickets.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {UserName = model.Name, Email = model.Email};
+                var user = new ApplicationUser {UserName = model.Name, Email = model.Email, FirstName = model.Name, SurName = model.SurName};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

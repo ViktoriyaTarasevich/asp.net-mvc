@@ -13,6 +13,9 @@ namespace MovieTickets.Models
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]
+        public string Image { get; set; }
+
 
         public virtual ICollection<Seance> Seances { get; set; } 
     }

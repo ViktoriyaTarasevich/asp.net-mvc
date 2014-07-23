@@ -1,6 +1,23 @@
-﻿@{
+﻿@model IEnumerable<MovieTickets.Models.Film>
+
+@{
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
 }
-<h2>Index</h2>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                    <a href=@Url.Action("Film", "Home",new[]{item})>
+                <img src=@Url.Content(@String.Format("./../../Content/Images/"+item.Image)) />
+                </a>
+                
+            </td>
+        </tr>
+    }
+}
+
 

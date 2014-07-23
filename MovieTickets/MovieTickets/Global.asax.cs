@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MovieTickets.App_Start;
 using MovieTickets.Migrations;
 using MovieTickets.Models;
 using WebMatrix.WebData;
@@ -14,6 +15,7 @@ namespace MovieTickets
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MovieTicketContext, Configuration>());
         }
     }
 }

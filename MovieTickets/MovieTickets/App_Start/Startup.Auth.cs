@@ -14,7 +14,7 @@ namespace MovieTickets
         public void ConfigureAuth(IAppBuilder app)
         {
            
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(MovieTicketContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
           

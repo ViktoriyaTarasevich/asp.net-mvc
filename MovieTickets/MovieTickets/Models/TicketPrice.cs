@@ -9,7 +9,6 @@ namespace MovieTickets.Models
     {
         public int Id { get; set; }
         public int Price { get; set; }
-
         public int TicketCategoryId { get; set; }
         public int SeanceId { get; set; }
     }
