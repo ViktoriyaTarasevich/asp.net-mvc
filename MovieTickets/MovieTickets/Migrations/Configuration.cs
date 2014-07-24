@@ -1,17 +1,18 @@
-using MovieTickets.App_Start;
-
 namespace MovieTickets.Migrations
 {
+    using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MovieTicketContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MovieTickets.App_Start.MovieTicketContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MovieTicketContext context)
+        protected override void Seed(MovieTickets.App_Start.MovieTicketContext context)
         {
             //  This method will be called after migrating to the latest version.
 

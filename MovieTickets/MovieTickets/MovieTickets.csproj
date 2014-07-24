@@ -154,6 +154,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\image-handler.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -162,6 +163,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\places-organization.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -171,6 +173,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +182,14 @@
     <Compile Include="Migrations\201407230813456_Initial.cs" />
     <Compile Include="Migrations\201407230813456_Initial.Designer.cs">
       <DependentUpon>201407230813456_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407240936325_ChangedFilmEntityAddedFlagForDelete.cs" />
+    <Compile Include="Migrations\201407240936325_ChangedFilmEntityAddedFlagForDelete.Designer.cs">
+      <DependentUpon>201407240936325_ChangedFilmEntityAddedFlagForDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407240945492_ChangedFilmEntity.cs" />
+    <Compile Include="Migrations\201407240945492_ChangedFilmEntity.Designer.cs">
+      <DependentUpon>201407240945492_ChangedFilmEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Film.cs" />
@@ -192,6 +203,7 @@
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
+    <Compile Include="ViewModels\TicketViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -206,6 +218,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\FilmGalery.cshtml" />
     <Content Include="Views\Ticket\Hall.cshtml" />
+    <Content Include="Views\Film\FilmControl.cshtml" />
+    <Content Include="Views\Film\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -226,6 +240,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201407230813456_Initial.resx">
       <DependentUpon>201407230813456_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407240936325_ChangedFilmEntityAddedFlagForDelete.resx">
+      <DependentUpon>201407240936325_ChangedFilmEntityAddedFlagForDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407240945492_ChangedFilmEntity.resx">
+      <DependentUpon>201407240945492_ChangedFilmEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

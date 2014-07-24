@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
@@ -7,37 +6,38 @@ using MovieTickets.Models;
 
 namespace MovieTickets.Controllers
 {
-    public class HomeController : Controller
+    public class FilmController : Controller
     {
         private UnitOfWork<MovieTicketContext> _unitOfWork;
         private IRepository<Film> _repository;
 
-        public HomeController()
+        public FilmController()
         {
             this._unitOfWork = new UnitOfWork<MovieTicketContext>();
             this._repository = this._unitOfWork.GetRepository<Film>();
         }
+
+
         //
-        // GET: /Home/
-        public ActionResult Index()
-        { 
+        // GET: /Admin/
+        public ActionResult FilmControl()
+        {
             var model = this._repository.GetAll();
             return View(model);
         }
 
         [HttpGet]
-        public ActionResult FilmGalery()
+        public ActionResult Delete(int id)
         {
-            
-            var model = this._repository.GetAll();
-            return View(model);
+            this._repository.Delete(this._repository.GetById(id));
+            this._unitOfWork.Save();
+            var mod = this._repository.GetById(id);
+            return RedirectToAction("FilmControl");
         }
 
-        [HttpGet]
-        public ActionResult Film(int id)
+        public ActionResult Create()
         {
-            var model = new List<Film>{this._repository.GetById(id)};
-            return View(model);
+            return View();
         }
-	}
+    }
 }

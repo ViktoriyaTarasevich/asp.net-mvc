@@ -1,27 +1,21 @@
-﻿
+﻿@model IEnumerable<MovieTickets.ViewModels.TicketViewModels>
 @{
     ViewBag.Title = "Hall";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hall</h2>
+<h2>@ViewBag.CurrentUser</h2>
+
+<script src ="../../Scripts/places-organization.js"></script>
 <div class="hall">
 
 </div>
 <script type="text/javascript">
-    function setPlaces() {
-        for (var i = 0; i < 100; i++) {
-            if (i % 10 === 0) {
-                $('.hall').append('<br/>');
-            }
-            $('.hall').append('<a id="' + i + '">a</a>');
-        }
-
-    }
     $(document).ready(function () {
-        setPlaces();
+        places();
+        $('.place #1').click();
     });
-    setPlaces();
+    
 </script>
 
 

@@ -36,7 +36,7 @@ namespace DataAccess.Repository
 
         public void Delete(TEntity entity)
         {
-            this._dbSet.Remove(entity);
+            this._context.Set<TEntity>().Remove(entity);
         }
     }
 }
