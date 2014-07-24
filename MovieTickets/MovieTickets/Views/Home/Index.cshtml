@@ -11,13 +11,11 @@
     {
         <tr>
             <td>
-                    <a href=@Url.Action("Film", "Home",new[]{item})>
-                <img src=@Url.Content(@String.Format("./../../Content/Images/"+item.Image)) />
+                <a href=@Url.Action("Film", "Home",new{id = item.Id})>
+                    <img src=@Url.Content(@String.Format("./../../Content/Images/"+item.Image)) />
                 </a>
-                
+                @Html.ActionLink("Купить билет", "Hall", "Ticket");
             </td>
         </tr>
     }
 }
-
-

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
 using MovieTickets.Models;
@@ -12,35 +13,34 @@ namespace MovieTickets.Controllers
 {
     public class HomeController : Controller
     {
+        private UnitOfWork<MovieTicketContext> _unitOfWork;
+        private IRepository<Film> _repository;
+
+        public HomeController()
+        {
+            _unitOfWork = new UnitOfWork<MovieTicketContext>();
+            _repository = _unitOfWork.GetRepository<Film>();
+        }
         //
         // GET: /Home/
         public ActionResult Index()
-        {
-            //var context = new MovieTicketContext();
-            //context.Users.Add(new User {Name = "Ptencha", SurName = "Zla", Password = "123455", RoleId = 2});
-            //context.SaveChanges();
-            //var uow = new UnitOfWork<MovieTicketContext>();
-            //var rep = uow.GetRepository<User>();
-            //rep.Insert(new User { Name = "Ptencha", SurName = "Zla", Password = "123455", RoleId = 2 });
-            //uow.Save();\
-            var uow = new UnitOfWork<MovieTicketContext>();
-            var repo = uow.GetRepository<Film>();
-            var model = repo.GetAll();
+        { 
+            var model = _repository.GetAll();
             return View(model);
         }
 
         [HttpGet]
-        public ActionResult Film()
+        public ActionResult FilmGalery()
         {
-            var uow = new UnitOfWork<MovieTicketContext>();
-            var repo = uow.GetRepository<Film>();
-            var model = repo.GetAll();
+            
+            var model = _repository.GetAll();
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Film(Film model)
+        [HttpGet]
+        public ActionResult Film(int id)
         {
+            var model = new List<Film>{_repository.GetById(id)};
             return View(model);
         }
 	}

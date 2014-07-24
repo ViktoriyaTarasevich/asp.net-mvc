@@ -19,25 +19,24 @@
         </th>
         <th></th>
     </tr>
-@if (Model != null)
-{
-    foreach (var item in Model)
+    @if (Model != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
 
-                <img src = @String.Format("./../../Content/Images/"+item.Image) />
-               
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            
-        </tr>
+                    <img src=@String.Format("./../../Content/Images/"+item.Image) />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+            </tr>
+        }
     }
-}
 </table>

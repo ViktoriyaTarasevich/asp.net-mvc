@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Hall";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hall</h2>
+<div class="hall">
+
+</div>
+<script type="text/javascript">
+    function setPlaces() {
+        for (var i = 0; i < 100; i++) {
+            if (i % 10 === 0) {
+                $('.hall').append('<br/>');
+            }
+            $('.hall').append('<a id="' + i + '">a</a>');
+        }
+
+    }
+    $(document).ready(function () {
+        setPlaces();
+    });
+    setPlaces();
+</script>
+
+
+
+
