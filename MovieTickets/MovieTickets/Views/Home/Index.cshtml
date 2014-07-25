@@ -4,18 +4,27 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+ <div class="container">
 @if (Model != null)
 {
+   
     foreach (var item in Model)
     {
-        <tr>
-            <td>
-                <a href=@Url.Action("Film", "Home",new{id = item.Id})>
-                    <img src=@Url.Content(@String.Format("./../../Content/Images/"+item.Image)) />
-                </a>
-                @Html.ActionLink("Купить билет", "Hall", "Ticket");
-            </td>
-        </tr>
+        
+            <div class = "posters">
+                <ul>
+                    <li>
+                        <a href=@Url.Action("Film", "Home",new{id = item.Id})>
+                            <img src=@Url.Content(@String.Format("./../../Content/Images/"+item.Image)) />
+                        </a>
+                    </li>
+                    <li class="position">
+                         @Html.ActionLink("Купить билет", "Hall", "Ticket")
+                    </li>
+                </ul>
+            </div>
+        
     }
+    
 }
+     </div>

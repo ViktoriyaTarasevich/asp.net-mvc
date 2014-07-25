@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
@@ -11,12 +12,12 @@ namespace MovieTickets.Controllers
     {
         private UnitOfWork<MovieTicketContext> _unitOfWork;
         private IRepository<Film> _repository;
+        private int _newFilmId;
         public FilmController()
         {
             this._unitOfWork = new UnitOfWork<MovieTicketContext>();
             this._repository = this._unitOfWork.GetRepository<Film>();
         }
-
 
         //
         // GET: /Admin/
@@ -44,13 +45,34 @@ namespace MovieTickets.Controllers
         public ActionResult Create(Film model, HttpPostedFileBase file)
         {
             model.Image = file.FileName;
-            
-            return RedirectToAction("NewSeance");
+            int idFilm = 0;
+            this._repository.Insert(model);
+            this._unitOfWork.Save();
+            this._newFilmId = model.Id;
+            var films = this._repository.GetAll();
+            foreach (var film in films)
+            {
+                if (film.Title == model.Title)
+                {
+                    idFilm = film.Id;
+                    break;
+                }
+            }
+            return RedirectToAction("NewSeance",new {id = idFilm});
         }
-
 
         public ActionResult NewSeance()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewSeance(Seance model,int id)
+        {
+            model.FilmId = id;
+            var senceRepository = this._unitOfWork.GetRepository<Seance>();
+            senceRepository.Insert(model);
+            this._unitOfWork.Save();
             return View();
         }
     }

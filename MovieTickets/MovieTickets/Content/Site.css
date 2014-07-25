@@ -9,6 +9,25 @@
     padding-right: 15px;
 }
 
+.posters {
+    margin-top: 50px;
+    display: inline;
+    float: left;
+    overflow: hidden;
+}
+.posters li {
+    list-style-type: none;
+
+}
+
+.posters a {
+    padding-left: 25px;
+}
+.position {
+    margin-left: 90px;
+    margin-top: 10px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input[type="text"],
 input[type="password"] {
