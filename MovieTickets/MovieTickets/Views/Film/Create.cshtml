@@ -7,7 +7,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Film",FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -35,12 +35,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="pic" accept="*" />
-                @Html.EditorFor(model => model.Image)
+                
+                @Html.ValueFor(model => model.Image)
+                @Html.HiddenFor(model => model.Image)
                 @Html.ValidationMessageFor(model => model.Image)
             </div>
         </div>
-
+        <input type="file" name="file" id="file" accept="image/*" />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -49,6 +50,4 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

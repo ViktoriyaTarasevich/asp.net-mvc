@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
@@ -10,7 +11,6 @@ namespace MovieTickets.Controllers
     {
         private UnitOfWork<MovieTicketContext> _unitOfWork;
         private IRepository<Film> _repository;
-
         public FilmController()
         {
             this._unitOfWork = new UnitOfWork<MovieTicketContext>();
@@ -36,6 +36,20 @@ namespace MovieTickets.Controllers
         }
 
         public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Film model, HttpPostedFileBase file)
+        {
+            model.Image = file.FileName;
+            
+            return RedirectToAction("NewSeance");
+        }
+
+
+        public ActionResult NewSeance()
         {
             return View();
         }

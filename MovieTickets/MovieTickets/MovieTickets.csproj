@@ -154,7 +154,6 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\image-handler.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -220,6 +219,7 @@
     <Content Include="Views\Ticket\Hall.cshtml" />
     <Content Include="Views\Film\FilmControl.cshtml" />
     <Content Include="Views\Film\Create.cshtml" />
+    <Content Include="Views\Film\NewSeance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
