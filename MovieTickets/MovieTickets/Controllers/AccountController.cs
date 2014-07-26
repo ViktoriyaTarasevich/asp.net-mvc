@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieTickets.App_Start;
+using MovieTickets.Models;
 using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
@@ -50,6 +53,9 @@ namespace MovieTickets.Controllers
                 var user = await UserManager.FindAsync(model.Name, model.Password);
                 if (user != null)
                 {
+                    var uow = new UnitOfWork<MovieTicketContext>();
+                    var repository = uow.GetRepository<IpStory>();
+                    //repository.Insert(new IpStory(){Time = DateTime.Now, Ip = , Id = })
                     await SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
@@ -79,7 +85,7 @@ namespace MovieTickets.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -88,9 +94,54 @@ namespace MovieTickets.Controllers
             return View(model);
         }
 
-        #region Helpers
-       
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
 
+        public async Task<ActionResult> Manage()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Manage
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Manage(ManageUserViewModel model)
+        {
+            bool hasPassword = HasPassword();
+            ViewBag.HasLocalPassword = hasPassword;
+            ViewBag.ReturnUrl = Url.Action("Manage");
+            if (hasPassword)
+            {
+                if (ModelState.IsValid)
+                {
+                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        await SignInAsync(user, false);
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    }
+                    AddErrors(result);
+                }
+            }
+            return View(model);
+        }
+
+        #region Helpers
+
+        private bool HasPassword()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.PasswordHash != null;
+            }
+            return false;
+        }
         private IAuthenticationManager AuthenticationManager
         {
             get

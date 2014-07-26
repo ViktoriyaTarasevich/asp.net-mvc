@@ -12,7 +12,7 @@ namespace MovieTickets.Models
         public DateTime DateTimeBuy { get; set; }
         public int SeanceId { get; set; }
         public int PlaceId { get; set; }
-        public int? AspNetUserId { get; set; }
+        public string ApplicationUserId { get; set; }
         
 
     }

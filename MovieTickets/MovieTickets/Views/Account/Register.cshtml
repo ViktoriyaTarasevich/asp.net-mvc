@@ -7,19 +7,19 @@
 
 <h2>Register</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <h4>RegisterViewModel</h4>
         <hr />
-        @Html.ValidationSummary(true)
+        @Html.ValidationSummary(true,"", new { @class = "text-danger" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SurName, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SurName)
+                @Html.EditorFor(model => model.SurName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SurName)
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password)
+                @Html.EditorFor(model => model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Password)
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.EditorFor(model => model.ConfirmPassword, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ConfirmPassword)
             </div>
         </div>

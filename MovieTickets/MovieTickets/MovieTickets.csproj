@@ -216,12 +216,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js.map">
+      <DependentUpon>jquery-1.10.2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-ui-1.10.4.min.js.map">
+      <DependentUpon>jquery-ui-1.10.4.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
@@ -266,6 +275,18 @@
     <Compile Include="Migrations\201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.Designer.cs">
       <DependentUpon>201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407261048474_ChangedLinkWithIdentityTables.cs" />
+    <Compile Include="Migrations\201407261048474_ChangedLinkWithIdentityTables.Designer.cs">
+      <DependentUpon>201407261048474_ChangedLinkWithIdentityTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407261057064_RestoredLinkWithIdentityTables.cs" />
+    <Compile Include="Migrations\201407261057064_RestoredLinkWithIdentityTables.Designer.cs">
+      <DependentUpon>201407261057064_RestoredLinkWithIdentityTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407261210175_ChangedAppUserIdType.cs" />
+    <Compile Include="Migrations\201407261210175_ChangedAppUserIdType.Designer.cs">
+      <DependentUpon>201407261210175_ChangedAppUserIdType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\IpStory.cs" />
@@ -275,6 +296,7 @@
     <Compile Include="Models\TicketCategory.cs" />
     <Compile Include="Models\TicketPrice.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ManageUserViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
@@ -296,6 +318,13 @@
     <Content Include="Views\Film\FilmControl.cshtml" />
     <Content Include="Views\Film\Create.cshtml" />
     <Content Include="Views\Film\NewSeance.cshtml" />
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Account\Manage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -328,6 +357,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.resx">
       <DependentUpon>201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407261048474_ChangedLinkWithIdentityTables.resx">
+      <DependentUpon>201407261048474_ChangedLinkWithIdentityTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407261057064_RestoredLinkWithIdentityTables.resx">
+      <DependentUpon>201407261057064_RestoredLinkWithIdentityTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407261210175_ChangedAppUserIdType.resx">
+      <DependentUpon>201407261210175_ChangedAppUserIdType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

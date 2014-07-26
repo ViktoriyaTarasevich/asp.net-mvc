@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var places = function setPlaces() {
+var setPlaces = function() {
     $('.hall').append('<hr/>');
     for (var i = 0; i < 50; i++) {
         if (i % 10 === 0) {
@@ -9,9 +9,17 @@ var places = function setPlaces() {
         if (i % 20 === 0) {
             $('.hall').append('<br/>');
         }
-        $('.hall').append('<a id = "' + i + '" class = "place"><img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/></a>');
+        $('.hall').append('<a id = "' + i + '" class = "place" title = "'+ getColumnInRow(i) +  '"><img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/></a>');
     }
 };
+
+function getColumnInRow(columnId) {
+    if (columnId > 10) {
+        return (columnId % 10);
+    } else {
+        return columnId;
+    }
+}
 $(document.body).on('click', '.place', function () {
     var element = $(this);
     if (element.hasClass('selectedSeat')) {

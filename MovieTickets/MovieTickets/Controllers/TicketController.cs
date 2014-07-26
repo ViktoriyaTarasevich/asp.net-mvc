@@ -28,7 +28,7 @@ namespace MovieTickets.Controllers
             List<int> array = new List<int>();
             foreach (var ticket in tickets)
             {
-                if (ticket.AspNetUserId != null)
+                if (ticket.ApplicationUserId != null)
                 {
                     array.Add(ticket.Id);
                 }
