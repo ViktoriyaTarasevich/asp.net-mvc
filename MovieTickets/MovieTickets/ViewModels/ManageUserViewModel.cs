@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using MovieTickets.Models;
 
 namespace MovieTickets.ViewModels
 {
@@ -24,5 +25,8 @@ namespace MovieTickets.ViewModels
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public string SurName { get; set; }
+        public string Email { get; set; }
+        public IEnumerable<IpStory> IpStories { get; set; } 
     }
 }

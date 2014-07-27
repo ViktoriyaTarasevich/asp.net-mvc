@@ -5,22 +5,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace MovieTickets.Models
+namespace MovieTickets.ViewModels
 {
-    public class IpStory
+    public class SeanceViewModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        [Required]
-        
-        public string Ip { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
+        [DataType(DataType.Time)]
         [Column(TypeName = "datetime2")]
         public DateTime Time { get; set; }
-
-        public string ApplicationUserId { get; set; }
+        [Required]
+        public int Price { get; set; }
     }
 }

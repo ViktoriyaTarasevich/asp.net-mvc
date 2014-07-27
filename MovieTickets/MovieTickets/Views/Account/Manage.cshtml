@@ -11,8 +11,9 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="row">
     <div class="col-md-12">
-        <p>You're logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
-
+        @User.Identity.GetUserName()
+        @Html.Label(Model.SurName)
+        @Html.Label(Model.Email)
         @using (Html.BeginForm("Manage", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -44,7 +45,14 @@
                 </div>
             </div>
         }    
-
+        @if (Model != null)
+        {
+            foreach (var ip in Model.IpStories)
+            {
+                @String.Format(ip.Ip +" DateTime: "+ ip.Time.ToShortDateString() + " " + ip.Time.ToShortTimeString())
+                <br/>
+            }
+        }
            
         
         

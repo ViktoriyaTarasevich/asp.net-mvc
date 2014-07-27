@@ -19,7 +19,7 @@ namespace DataAccess.Repository
             return this._dbSet.AsQueryable();
         }
 
-        public TEntity GetById(int id)
+        public TEntity GetById<T>(T id)
         {
             return this._dbSet.Find(id);
         }

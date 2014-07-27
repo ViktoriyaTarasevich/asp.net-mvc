@@ -4,6 +4,7 @@ using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
 using MovieTickets.Models;
+using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
 {
@@ -66,11 +67,11 @@ namespace MovieTickets.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewSeance(Seance model,int id)
+        public ActionResult NewSeance(SeanceViewModel model,int id)
         {
-            model.FilmId = id;
             var senceRepository = this._unitOfWork.GetRepository<Seance>();
-            senceRepository.Insert(model);
+            Seance seance = new Seance() {FilmId = id, Time = model.Time, Date = model.Date};
+            senceRepository.Insert(seance);
             this._unitOfWork.Save();
             return View();
         }

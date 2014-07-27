@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -35,9 +40,10 @@ namespace MovieTickets.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public  ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            
             return View();
         }
 
@@ -53,10 +59,9 @@ namespace MovieTickets.Controllers
                 var user = await UserManager.FindAsync(model.Name, model.Password);
                 if (user != null)
                 {
-                    var uow = new UnitOfWork<MovieTicketContext>();
-                    var repository = uow.GetRepository<IpStory>();
-                    //repository.Insert(new IpStory(){Time = DateTime.Now, Ip = , Id = })
+                    
                     await SignInAsync(user, model.RememberMe);
+                    
                     return RedirectToLocal(returnUrl);
                 }
                 ModelState.AddModelError("", "Invalid username or password.");
@@ -96,13 +101,39 @@ namespace MovieTickets.Controllers
 
         public ActionResult LogOff()
         {
+            var uow = new UnitOfWork<MovieTicketContext>();
+            var repository = uow.GetRepository<IpStory>();
+            if (User.Identity.GetUserId() != null)
+            {
+                repository.Insert(new IpStory()
+                {
+                    Time = DateTime.Now,
+                    Ip = Request.UserHostAddress,
+                    ApplicationUserId = User.Identity.GetUserId()
+                });
+            }
+
+            uow.Save();
             AuthenticationManager.SignOut();
+            
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<ActionResult> Manage()
+        public ActionResult Manage()
         {
-            return View();
+            var uow = new UnitOfWork<MovieTicketContext>();
+           
+            
+            var userRepository = uow.GetRepository<ApplicationUser>();
+            var userinf = userRepository.GetById(User.Identity.GetUserId());
+            var model = new ManageUserViewModel()
+            {
+                SurName = userinf.SurName,
+                Email = userinf.Email,
+                IpStories = userinf.IpStories
+            };
+
+            return View(model);
         }
 
         //
@@ -121,6 +152,7 @@ namespace MovieTickets.Controllers
                     IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
+                        
                         var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                         await SignInAsync(user, false);
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
@@ -128,6 +160,7 @@ namespace MovieTickets.Controllers
                     AddErrors(result);
                 }
             }
+            
             return View(model);
         }
 
@@ -153,7 +186,12 @@ namespace MovieTickets.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            var givenName = user.FirstName;
+
+            identity.AddClaim(new Claim(ClaimTypes.GivenName, givenName));
+
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
 
         private void AddErrors(IdentityResult result)

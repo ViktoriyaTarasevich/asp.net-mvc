@@ -37,5 +37,10 @@ namespace MovieTickets.Controllers
             ViewBag.CurrentUser = User.Identity.GetUserId();
             return View();
         }
+
+        public ActionResult NewTickets()
+        {
+            return PartialView();
+        }
     }
 }

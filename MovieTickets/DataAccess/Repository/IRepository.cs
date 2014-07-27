@@ -2,12 +2,12 @@
 
 namespace DataAccess.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity> where TEntity : class
     {
-        IEnumerable<T> GetAll();
-        T GetById(int id);
-        void Insert(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        IEnumerable<TEntity> GetAll();
+        TEntity GetById<T>(T id);
+        void Insert(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
     }
 }
