@@ -291,6 +291,18 @@
     <Compile Include="Migrations\201407261632131_ChangedDateTypeToDateTime2.Designer.cs">
       <DependentUpon>201407261632131_ChangedDateTypeToDateTime2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407271321101_AddedPricesIncreasingCoef.cs" />
+    <Compile Include="Migrations\201407271321101_AddedPricesIncreasingCoef.Designer.cs">
+      <DependentUpon>201407271321101_AddedPricesIncreasingCoef.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407271357369_RemovedLinkFromTicketPriceToTicketCategory.cs" />
+    <Compile Include="Migrations\201407271357369_RemovedLinkFromTicketPriceToTicketCategory.Designer.cs">
+      <DependentUpon>201407271357369_RemovedLinkFromTicketPriceToTicketCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs" />
+    <Compile Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.Designer.cs">
+      <DependentUpon>201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\IpStory.cs" />
@@ -331,6 +343,7 @@
     </Content>
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Ticket\NewTickets.cshtml" />
+    <Content Include="Views\Account\Backet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -379,6 +392,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407261632131_ChangedDateTypeToDateTime2.resx">
       <DependentUpon>201407261632131_ChangedDateTypeToDateTime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407271321101_AddedPricesIncreasingCoef.resx">
+      <DependentUpon>201407271321101_AddedPricesIncreasingCoef.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407271357369_RemovedLinkFromTicketPriceToTicketCategory.resx">
+      <DependentUpon>201407271357369_RemovedLinkFromTicketPriceToTicketCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.resx">
+      <DependentUpon>201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

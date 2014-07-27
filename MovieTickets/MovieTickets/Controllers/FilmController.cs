@@ -72,6 +72,11 @@ namespace MovieTickets.Controllers
             var senceRepository = this._unitOfWork.GetRepository<Seance>();
             Seance seance = new Seance() {FilmId = id, Time = model.Time, Date = model.Date};
             senceRepository.Insert(seance);
+            var priceRepository = this._unitOfWork.GetRepository<TicketPrice>();
+            
+            this._unitOfWork.Save();
+            var seanceid = seance.Id;
+            priceRepository.Insert(new TicketPrice{Price = model.Price, SeanceId = seanceid });
             this._unitOfWork.Save();
             return View();
         }

@@ -68,6 +68,7 @@ a:focus {
 a:active,
 a:hover {
   outline: 0;
+
 }
 
 h1 {
@@ -341,7 +342,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #2a6496;
+  color: yellow;
   text-decoration: underline;
 }
 
@@ -3842,7 +3843,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eeeeee;
+  background-color: #FFD700;
   border-color: #428bca;
 }
 
@@ -3874,7 +3875,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #dddddd;
+  border-color: #FFD700 #FFD700 #dddddd;
 }
 
 .nav-tabs > li.active > a,
@@ -3882,7 +3883,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:focus {
   color: #555555;
   cursor: default;
-  background-color: #ffffff;
+  background-color: #FFD700
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
 }
@@ -3913,7 +3914,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-tabs.nav-justified > .active > a {
-  border-bottom-color: #ffffff;
+  border-bottom-color: #FFD700
 }
 
 .nav-pills > li {
@@ -3931,7 +3932,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #ffffff;
+  color: #FFD700
   background-color: #428bca;
 }
 
@@ -3973,7 +3974,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-tabs-justified > .active > a {
-  border-bottom-color: #ffffff;
+  border-bottom-color: #FFD700
 }
 
 .tabbable:before,
@@ -4384,7 +4385,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default {
-  background-color: #f8f8f8;
+  background-color: #FFD700;
   border-color: #e7e7e7;
 }
 

@@ -12,8 +12,11 @@
 <div class="row">
     <div class="col-md-12">
         @User.Identity.GetUserName()
-        @Html.Label(Model.SurName)
-        @Html.Label(Model.Email)
+        @if (Model != null)
+        {
+            @Html.Label(Model.SurName)
+            @Html.Label(Model.Email)
+        }
         @using (Html.BeginForm("Manage", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()

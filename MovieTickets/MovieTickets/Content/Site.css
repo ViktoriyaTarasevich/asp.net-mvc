@@ -28,6 +28,18 @@
     margin-top: 10px;
 }
 
+.hall {
+
+margin: auto;
+}
+
+.place {
+    margin: 5px;
+}
+.vacantSeat, .reservedSeat,.selectedSeat {
+    margin-bottom: 5px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input[type="text"],
 input[type="password"] {

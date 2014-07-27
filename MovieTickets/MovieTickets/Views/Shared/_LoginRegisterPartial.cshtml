@@ -5,12 +5,17 @@
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li>@Html.ActionLink("Выйти","LogOff","Account")</li>
-        </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href=@Url.Action("Backet", "Account",new{id = @User.Identity.GetUserId()})>
+                <img src=@Url.Content(@String.Format("./../../Content/Images/Basket/basket.png")) />
+            </a>
+        </li>
+        <li>
+            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null,htmlAttributes:"title")
+        </li>
+        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+    </ul>
     }
 }
 else

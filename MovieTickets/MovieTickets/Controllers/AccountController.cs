@@ -164,6 +164,19 @@ namespace MovieTickets.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult Backet(string id)
+        {
+            if (id == User.Identity.GetUserId())
+            {
+                var uow = new UnitOfWork<MovieTicketContext>();
+                var repository = uow.GetRepository<Ticket>();
+                var tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
+                return View();
+            }
+            return Redirect("Error");
+        }
+
         #region Helpers
 
         private bool HasPassword()

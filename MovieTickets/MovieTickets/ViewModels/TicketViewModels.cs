@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace MovieTickets.ViewModels
 {
     public class TicketViewModels
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
+        public string Film { get; set; }
         public int Row { get; set; }
+        public int Column { get; set; }
+        public int Price { get; set; }
         public bool IsLorry { get; set; }
-        public bool IsVacant { get; set; }
-        public bool IsSelected { get; set; }
+        public bool IsVip { get; set; }
+
     }
 }

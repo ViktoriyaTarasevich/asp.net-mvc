@@ -1,25 +1,36 @@
 ﻿'use strict';
 
 var setPlaces = function() {
-    $('.hall').append('<hr/>');
-    for (var i = 0; i < 50; i++) {
-        if (i % 10 === 0) {
+    $('.hall').append('<p>--------------------------Экран-------------------------</p>');
+    $('.hall').append('<br/>');
+    var k = 59;
+    for (var i = 0; i < 5; i++) {
+        if (i === 0 || i === 1) {
+            $('.hall').append('<span>' + (i + 1) + 'V</span>');
+        } else if (i === 4) {
+            $('.hall').append('<span>' + (i + 1) + 'B</span>');
+        }
+        else {
+            $('.hall').append('<span>' + (i + 1) + 'C</span>');
+        }
+        for (var j = 0; j < 10; j++) {
+            $('.hall').append('<a id = "' + (k++) + '" class = "place" title = "' + (j+1) + '"><img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/></a>');
+        }
+        if (i === 0 || i === 1) {
+            $('.hall').append('<span>' + (i + 1) + 'V</span>');
+        }else if (i === 4) {
+            $('.hall').append('<span>' + (i + 1) + 'B</span>');
+        }
+        else {
+            $('.hall').append('<span>' + (i + 1) + 'C</span>');
+        }
+        $('.hall').append('<br/>');
+        if (i % 2) {
             $('.hall').append('<br/>');
         }
-        if (i % 20 === 0) {
-            $('.hall').append('<br/>');
-        }
-        $('.hall').append('<a id = "' + i + '" class = "place" title = "'+ getColumnInRow(i) +  '"><img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/></a>');
     }
 };
 
-function getColumnInRow(columnId) {
-    if (columnId > 10) {
-        return (columnId % 10);
-    } else {
-        return columnId;
-    }
-}
 $(document.body).on('click', '.place', function () {
     var element = $(this);
     if (element.hasClass('selectedSeat')) {

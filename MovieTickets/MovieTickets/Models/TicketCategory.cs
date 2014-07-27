@@ -14,7 +14,7 @@ namespace MovieTickets.Models
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
+        public int PriceCoef { get; set; }
         public virtual ICollection<Place> Places { get; set; }
-        public virtual ICollection<TicketPrice> TicketPrices { get; set; } 
     }
 }
