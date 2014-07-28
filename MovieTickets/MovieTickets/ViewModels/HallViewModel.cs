@@ -10,7 +10,7 @@ namespace MovieTickets.ViewModels
         public string UserId { get; set; }
         [HiddenInput(DisplayValue = false)]
         public List<int> PlacesId  { get; set; }
-        public IEnumerable<Seance> Seances { get; set; } 
+        public List<SelectListItem> Seances { get; set; } 
 
 
     }

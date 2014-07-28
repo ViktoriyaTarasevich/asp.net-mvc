@@ -61,6 +61,8 @@ namespace MovieTickets.Controllers
             return RedirectToAction("NewSeance",new {id = idFilm});
         }
 
+
+
         public ActionResult NewSeance()
         {
             return View();

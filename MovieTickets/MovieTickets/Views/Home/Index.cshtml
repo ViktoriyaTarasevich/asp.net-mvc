@@ -19,7 +19,7 @@
                         </a>
                     </li>
                     <li class="position">
-                         @Html.ActionLink("Купить билет", "Hall", "Ticket")
+                          <a href=@Url.Action("Hall", "Ticket" ,new{idFilm = item.Id})>Купить билет</a>
                     </li>
                 </ul>
             </div>
@@ -27,4 +27,4 @@
     }
     
 }
-     </div>
+</div>

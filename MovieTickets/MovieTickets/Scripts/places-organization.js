@@ -1,6 +1,7 @@
 ﻿'use strict';
 
-var setPlaces = function() {
+var setPlaces = function (arg) {
+    var reservedSeats = arg;
     $('.hall').append('<p>--------------------------Экран-------------------------</p>');
     $('.hall').append('<br/>');
     var k = 59;
@@ -14,7 +15,21 @@ var setPlaces = function() {
             $('.hall').append('<span>' + (i + 1) + 'C</span>');
         }
         for (var j = 0; j < 10; j++) {
-            $('.hall').append('<a id = "' + (k++) + '" class = "place" title = "' + (j+1) + '"><img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/></a>');
+            if (k.toString in reservedSeats) {
+                $('.hall').append('<a id = "' +
+                   (k++) +
+                   '" class = "place" title = "' +
+                   (j + 1) +
+                   '"><img src = "./../../Content/Images/Seats/reservedseat.jpg" class = "reservedSeat"/></a>');
+            } else {
+                $('.hall').append('<a id = "' +
+                    (k++) +
+                    '" class = "place" title = "' +
+                    (j + 1) +
+                    '"><img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/></a>');
+
+            }
+            
         }
         if (i === 0 || i === 1) {
             $('.hall').append('<span>' + (i + 1) + 'V</span>');
