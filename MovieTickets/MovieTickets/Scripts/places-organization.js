@@ -1,5 +1,4 @@
 ﻿'use strict';
-
 var setPlaces = function (arg) {
     var reservedSeats = arg;
     $('.hall').append('<p>--------------------------Экран-------------------------</p>');
@@ -62,4 +61,13 @@ $(document.body).on('click', '.place', function () {
         element.html('<img src = "./../../Content/Images/Seats/selectedseat.jpg" class = "selectedSeat"/>');
         return;
     }
+    
 });
+
+function setSelectedPlaceId() {
+    var elements = $('.selectedSeat');
+    var places = elements.each().attr('id');
+    
+    return places;
+};
+

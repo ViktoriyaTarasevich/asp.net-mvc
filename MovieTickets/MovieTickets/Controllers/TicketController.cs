@@ -67,8 +67,10 @@ namespace MovieTickets.Controllers
             return View(model);
         }
 
-        public ActionResult Hall(HallViewModel model)
+        [HttpPost]
+        public ActionResult Hall(HallViewModel model,object data)
         {
+
             return RedirectToAction("Index", "Home");
         }
 

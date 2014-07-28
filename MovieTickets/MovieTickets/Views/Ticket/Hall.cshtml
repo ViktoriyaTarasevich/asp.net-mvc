@@ -15,8 +15,25 @@
     $(document).ready(function () {
         setPlaces(@Html.Raw(Json.Encode(Model.PlacesId)));
     });
+
+    function getData() {
+        $.ajax({
+           url: '@Url.Action("Hall", "Ticket")',
+           type: "POST",
+           data: { data: setSelectedPlaceId() },
+           dataType: "html"
+       });
+    }
+   
 </script>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(model=>model.PlacesId,new {  @id = "places" })
+    
+    <input type="submit" onclick="getData()" value="Добавить в корзину"/>
+}
 
 
