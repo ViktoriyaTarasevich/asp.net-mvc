@@ -15,10 +15,10 @@ var setPlaces = function (arg) {
             $('.hall').append('<span>' + (i + 1) + 'C</span>');
         }
         for (var j = 0; j < 10; j++) {
-            if (k.toString in reservedSeats) {
+            if (k == reservedSeats[0]) {
                 $('.hall').append('<a id = "' +
                    (k++) +
-                   '" class = "place" title = "' +
+                   '" class = "place reservedSeat" title = "' +
                    (j + 1) +
                    '"><img src = "./../../Content/Images/Seats/reservedseat.jpg" class = "reservedSeat"/></a>');
             } else {
@@ -51,13 +51,15 @@ $(document.body).on('click', '.place', function () {
     if (element.hasClass('selectedSeat')) {
         element.removeClass('selectedSeat');
         element.html('<img src = "./../../Content/Images/Seats/vacantseat.jpg" class = "vacantSeat"/>');
+        return;
     }
-    else if (element.hasClass('reservedSeat')) {
-        
+    if (element.hasClass('reservedSeat')) {
+        return;
     }
     else {
         element.addClass('selectedSeat');
         element.find('.vacantSeat').remove();
         element.html('<img src = "./../../Content/Images/Seats/selectedseat.jpg" class = "selectedSeat"/>');
+        return;
     }
 });
