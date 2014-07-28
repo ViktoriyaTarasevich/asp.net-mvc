@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
@@ -22,9 +24,37 @@ namespace MovieTickets.Controllers
         }
         // GET: Ticket
 
+        [HttpGet]
+        public ActionResult GetSeance(int idFilm)
+        {
+            var model = new HallViewModel();
+            var seanceRepository = this._unitOfWork.GetRepository<Seance>();
+            var seances = seanceRepository.GetAll();
+            model.Seances = new List<SelectListItem>();
+            foreach (var seance in seances)
+            {
+                if (seance.FilmId == idFilm)
+                {
+                    model.Seances.Add(new SelectListItem
+                        {
+                            Text = (seance.Date.ToShortDateString() + ":" + seance.Time.ToShortTimeString()), 
+                            Value = seance.Id.ToString(CultureInfo.InvariantCulture)
+                        });
+
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult GetSeance(HallViewModel model)
+        {
+            return RedirectToAction("Hall", "Ticket", new {idSeance = model.SeanceId});
+        }
+
         
         [HttpGet]
-        public ActionResult Hall(int? idFilm)
+        public ActionResult Hall(int idSeance)
         {
             var model = new HallViewModel();
             var tickets = this._repository.GetAll();
@@ -33,19 +63,6 @@ namespace MovieTickets.Controllers
             foreach (var i in array)
             {
                 model.PlacesId.Add(i.PlaceId);
-            }
-
-            ViewBag.ReservedSeats = array;
-            var seanceRepository = this._unitOfWork.GetRepository<Seance>();
-            var seances = seanceRepository.GetAll();
-            model.Seances = new List<SelectListItem>();
-            foreach (var seance in seances)
-            {
-                if (seance.FilmId == idFilm)
-                {
-                    model.Seances.Add(new SelectListItem { Text = (seance.Date.ToShortDateString() +":"+ seance.Time.ToShortTimeString()), Value = seance.Id.ToString(CultureInfo.InvariantCulture)});
-                    
-                }
             }
             return View(model);
         }

@@ -18,29 +18,5 @@
 </script>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-           
-            <div class="col-md-10">
-                @if (Model.Seances != null)
-                {
-                    @Html.DropDownListFor(model => model.Seances, Model.Seances)
-                }
-            </div>
-        </div>
-
-        <div class="form-group right">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Добавить в корзину" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
 

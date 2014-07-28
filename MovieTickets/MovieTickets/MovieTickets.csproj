@@ -353,6 +353,8 @@
     <Content Include="Views\Ticket\NewTickets.cshtml" />
     <Content Include="Views\Account\Backet.cshtml" />
     <Content Include="Views\Ticket\Hall.cshtml" />
+    <Content Include="Views\Ticket\_PartialHall.cshtml" />
+    <Content Include="Views\Ticket\GetSeance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
