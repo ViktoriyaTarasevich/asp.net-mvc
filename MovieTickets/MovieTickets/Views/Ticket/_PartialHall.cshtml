@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Hall";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="../../Scripts/places-organization.js"></script>
+<div class="container">
+    <div class="hall">
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setPlaces(@Html.Raw(Json.Encode(Model.PlacesId)));
+    });
+</script>
