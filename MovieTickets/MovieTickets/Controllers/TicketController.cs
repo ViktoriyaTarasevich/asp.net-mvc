@@ -25,22 +25,21 @@ namespace MovieTickets.Controllers
         public ActionResult Hall()
         {
             var tickets = this._repository.GetAll();
-            List<int> array = new List<int>();
-            foreach (var ticket in tickets)
-            {
-                if (ticket.ApplicationUserId != null)
-                {
-                    array.Add(ticket.Id);
-                }
-            }
+            var array = (from ticket in tickets where ticket.ApplicationUserId != null select ticket.Id).ToList();
             ViewBag.ReservedSeats = array;
-            ViewBag.CurrentUser = User.Identity.GetUserId();
             return View();
         }
 
         public ActionResult NewTickets()
         {
             return PartialView();
+        }
+
+        public ActionResult Delete(int id)
+        {
+            this._repository.Delete(this._repository.GetById(id));
+            this._unitOfWork.Save();
+            return RedirectToAction("Backet", "Account");
         }
     }
 }
