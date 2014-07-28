@@ -172,7 +172,22 @@ namespace MovieTickets.Controllers
                 var uow = new UnitOfWork<MovieTicketContext>();
                 var repository = uow.GetRepository<Ticket>();
                 var tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
-                return View();
+                var placesRepository = uow.GetRepository<Place>();
+                var seanceRepository = uow.GetRepository<Seance>();
+                var filmRepository = uow.GetRepository<Film>();
+                var priceRepository = uow.GetRepository<TicketPrice>();
+                var ticketCategoryRepository = uow.GetRepository<TicketCategory>();
+                var ticketsModel = (from ticket in tickets
+                    let place = placesRepository.GetById(ticket.PlaceId)
+                    let seance = seanceRepository.GetById(ticket.SeanceId)
+                    let film = filmRepository.GetById(seance.FilmId)
+                    let price = priceRepository.GetById(seance.TicketPriceId)
+                    let category = ticketCategoryRepository.GetById(place.TicketCategoryId)
+                    select new TicketViewModels
+                    {
+                        Id = ticket.Id, Row = place.Row, Column = place.Col, Film = film.Title, Price = price.Price*category.PriceCoef
+                    }).ToList();
+                return View(ticketsModel);
             }
             return Redirect("Error");
         }

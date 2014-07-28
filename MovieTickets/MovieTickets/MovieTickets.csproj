@@ -303,6 +303,14 @@
     <Compile Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.Designer.cs">
       <DependentUpon>201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407280434267_ChangedLinkBeetwenPriceAndSeance.cs" />
+    <Compile Include="Migrations\201407280434267_ChangedLinkBeetwenPriceAndSeance.Designer.cs">
+      <DependentUpon>201407280434267_ChangedLinkBeetwenPriceAndSeance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs" />
+    <Compile Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.Designer.cs">
+      <DependentUpon>201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Models\IpStory.cs" />
@@ -401,6 +409,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.resx">
       <DependentUpon>201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407280434267_ChangedLinkBeetwenPriceAndSeance.resx">
+      <DependentUpon>201407280434267_ChangedLinkBeetwenPriceAndSeance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.resx">
+      <DependentUpon>201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

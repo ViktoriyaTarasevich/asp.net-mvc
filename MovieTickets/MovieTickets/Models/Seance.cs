@@ -18,9 +18,11 @@ namespace MovieTickets.Models
         [Column(TypeName = "datetime2")]
         public DateTime Time { get; set; }
         public int FilmId { get; set; }
+
+        public int TicketPriceId { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
 
-        public virtual ICollection<TicketPrice> TicketPrices { get; set; }
+        
 
         
     }

@@ -69,14 +69,12 @@ namespace MovieTickets.Controllers
         [HttpPost]
         public ActionResult NewSeance(SeanceViewModel model,int id)
         {
-            var senceRepository = this._unitOfWork.GetRepository<Seance>();
-            Seance seance = new Seance() {FilmId = id, Time = model.Time, Date = model.Date};
-            senceRepository.Insert(seance);
             var priceRepository = this._unitOfWork.GetRepository<TicketPrice>();
-            
-            this._unitOfWork.Save();
-            var seanceid = seance.Id;
-            priceRepository.Insert(new TicketPrice{Price = model.Price, SeanceId = seanceid });
+            var price = new TicketPrice { Price = model.Price };
+            priceRepository.Insert(price);
+            var senceRepository = this._unitOfWork.GetRepository<Seance>();
+            var seance = new Seance {FilmId = id, Time = model.Time, Date = model.Date,TicketPriceId = price.Id};
+            senceRepository.Insert(seance);
             this._unitOfWork.Save();
             return View();
         }

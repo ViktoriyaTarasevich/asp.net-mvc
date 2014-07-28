@@ -16,8 +16,8 @@ namespace MovieTickets.ViewModels
         public int Row { get; set; }
         public int Column { get; set; }
         public int Price { get; set; }
-        public bool IsLorry { get; set; }
-        public bool IsVip { get; set; }
+
+        
 
     }
 }

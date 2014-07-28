@@ -18,12 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsLorry)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsVip)
-        </th>
+       
         <th></th>
     </tr>
 @if (Model != null)
@@ -43,12 +38,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsLorry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsVip)
-            </td>
+           
             <td>
                 @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                 @Html.ActionLink("Details", "Details", new {id = item.Id}) |
