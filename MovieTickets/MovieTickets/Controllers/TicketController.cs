@@ -6,13 +6,13 @@ using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
-using MovieTickets.App_Start;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         private readonly IRepository<Ticket> _repository;
@@ -61,7 +61,9 @@ namespace MovieTickets.Controllers
             ViewBag.SeanceId = idSeance;
             model.SeanceId = idSeance;
             IEnumerable<Ticket> tickets = _repository.GetAll();
-            List<Ticket> array = (from ticket in tickets where ticket.ApplicationUserId != null select ticket).ToList();
+            List<Ticket> array = (from ticket in tickets
+                                  where ticket.ApplicationUserId != null && ticket.SeanceId == idSeance
+                                  select ticket).ToList();
             model.PlacesId = new List<int>();
             foreach (Ticket i in array)
             {
@@ -86,7 +88,7 @@ namespace MovieTickets.Controllers
             }
             
             _unitOfWork.Save();
-            return View("Hall",new{idSeance = seanceId});
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult NewTickets()
