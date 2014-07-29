@@ -1,5 +1,4 @@
-﻿@using System.Web.Mvc.Html
-@model MovieTickets.ViewModels.HallViewModel
+﻿@model MovieTickets.ViewModels.HallViewModel
 
 @{
     ViewBag.Title = "GetSeance";
@@ -9,7 +8,6 @@
 
 @if (Model.Seances.Count > 0)
 {
-
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -23,7 +21,7 @@
                 <div class="col-md-10">
                     @if (Model.Seances != null)
                     {
-                        @Html.DropDownListFor(model => model.SeanceId,Model.Seances)
+                        @Html.DropDownListFor(model => model.SeanceId, Model.Seances)
                     }
                 </div>
             </div>
@@ -40,4 +38,3 @@ else
 {
     <h1>На данный фильм нет доступных сеансов.</h1>
 }
-

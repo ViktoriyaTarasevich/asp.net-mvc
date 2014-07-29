@@ -1,30 +1,27 @@
-﻿@model IEnumerable<MovieTickets.Entities.Models.Film>
+﻿@using MovieTickets.Entities.Models
+@model IEnumerable<MovieTickets.Entities.Models.Film>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- <div class="container">
-@if (Model != null)
-{
-   
-    foreach (var item in Model)
+<div class="container">
+    @if (Model != null)
     {
-        
+        foreach (Film item in Model)
+        {
             <div class = "posters">
                 <ul>
                     <li>
-                        <a href=@Url.Action("Film", "Home",new{id = item.Id})>
-                            <img src=@Url.Content("~/Content/Images/"+item.Image) />
+                        <a href=@Url.Action("Film", "Home", new {id = item.Id})>
+                            <img src=@Url.Content("~/Content/Images/" + item.Image) />
                         </a>
                     </li>
                     <li class="position">
-                          <a href=@Url.Action("GetSeance", "Ticket" ,new{idFilm = item.Id})>Купить билет</a>
+                        <a href=@Url.Action("GetSeance", "Ticket", new {idFilm = item.Id})>Купить билет</a>
                     </li>
                 </ul>
             </div>
-        
+        }
     }
-    
-}
 </div>

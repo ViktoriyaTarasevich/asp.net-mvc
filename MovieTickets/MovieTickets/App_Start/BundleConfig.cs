@@ -7,9 +7,9 @@ namespace MovieTickets.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
-               "~/Scripts/jquery-{version}.js",
-               "~/Scripts/jquery.*",
-               "~/Scripts/jquery-ui-{version}.js"));
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery.*",
+                "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                 "~/Scripts/bootstrap.js",

@@ -9,10 +9,8 @@ namespace MovieTickets.ViewModels
         public int SeanceId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public List<int> PlacesId  { get; set; }
+        public List<int> PlacesId { get; set; }
 
-        public List<SelectListItem> Seances { get; set; } 
-
-
+        public List<SelectListItem> Seances { get; set; }
     }
 }

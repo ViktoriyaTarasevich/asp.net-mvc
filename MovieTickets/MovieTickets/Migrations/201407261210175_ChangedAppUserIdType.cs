@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace MovieTickets.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class ChangedAppUserIdType : DbMigration
     {
         public override void Up()
@@ -14,7 +13,7 @@ namespace MovieTickets.Migrations
             DropColumn("dbo.Tickets", "ApplicationUser_Id");
             DropColumn("dbo.IpStories", "ApplicationUser_Id");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.IpStories", "ApplicationUser_Id", c => c.Int(nullable: false));

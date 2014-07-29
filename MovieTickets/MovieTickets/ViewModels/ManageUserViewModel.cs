@@ -6,7 +6,6 @@ namespace MovieTickets.ViewModels
 {
     public class ManageUserViewModel
     {
-        
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
@@ -22,8 +21,9 @@ namespace MovieTickets.ViewModels
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
         public string SurName { get; set; }
         public string Email { get; set; }
-        public IEnumerable<IpStory> IpStories { get; set; } 
+        public IEnumerable<IpStory> IpStories { get; set; }
     }
 }

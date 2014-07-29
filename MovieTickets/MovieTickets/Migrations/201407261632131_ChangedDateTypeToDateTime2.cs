@@ -1,19 +1,19 @@
+using System.Data.Entity.Migrations;
+
 namespace MovieTickets.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class ChangedDateTypeToDateTime2 : DbMigration
     {
         public override void Up()
         {
             AlterColumn("dbo.Seances", "Date", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
             AlterColumn("dbo.Seances", "Time", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
-            AlterColumn("dbo.Tickets", "DateTimeBuy", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
+            AlterColumn("dbo.Tickets", "DateTimeBuy",
+                        c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
             AlterColumn("dbo.IpStories", "Date", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
             AlterColumn("dbo.IpStories", "Time", c => c.DateTime(nullable: false, precision: 7, storeType: "datetime2"));
         }
-        
+
         public override void Down()
         {
             AlterColumn("dbo.IpStories", "Time", c => c.DateTime(nullable: false));

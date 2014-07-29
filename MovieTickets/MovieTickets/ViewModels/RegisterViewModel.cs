@@ -28,5 +28,4 @@ namespace MovieTickets.ViewModels
         [Display(Name = "Подтвердите пароль")]
         public string ConfirmPassword { get; set; }
     }
-
 }

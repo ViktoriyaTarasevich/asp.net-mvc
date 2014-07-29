@@ -14,16 +14,24 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         setPlaces(@Html.Raw(Json.Encode(Model.PlacesId)));
     });
-</script>
 
+    function getData() {
+        $.ajax({
+            url: '@Url.Action("Hall", "Ticket")',
+            type: "POST",
+            data: { data: getParseData(setSelectedPlaceId()) },
+            traditional: true,
+        });
+    }
+</script>
+@Model.SeanceId;
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model=>model.PlacesId,new {  @id = "places" })
-    <input type="submit" onclick="getData()" value="Добавить в корзину"/>
+    @Html.HiddenFor(model => model.SeanceId, new {@value = Model.SeanceId})
+    @Html.HiddenFor(model => model.PlacesId, new {@id = "places"})
+    <input type="submit" onclick=" getData() " value="Добавить в корзину"/>
 }
-
-

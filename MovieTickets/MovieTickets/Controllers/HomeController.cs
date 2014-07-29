@@ -3,42 +3,42 @@ using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
+using MovieTickets.Context;
 using MovieTickets.Entities.Models;
-
 
 namespace MovieTickets.Controllers
 {
     public class HomeController : Controller
     {
-        private UnitOfWork<MovieTicketContext> _unitOfWork;
-        private IRepository<Film> _repository;
+        private readonly IRepository<Film> _repository;
+        private readonly IUnitOfWork<MovieTicketContext> _unitOfWork;
 
-        public HomeController()
+        public HomeController(IUnitOfWork<MovieTicketContext> uof)
         {
-            this._unitOfWork = new UnitOfWork<MovieTicketContext>();
-            this._repository = this._unitOfWork.GetRepository<Film>();
+            _unitOfWork = uof;
+            _repository = _unitOfWork.GetRepository<Film>();
         }
+
         //
         // GET: /Home/
         public ActionResult Index()
-        { 
-            var model = this._repository.GetAll();
+        {
+            IEnumerable<Film> model = _repository.GetAll();
             return View(model);
         }
 
         [HttpGet]
         public ActionResult FilmGalery()
         {
-            
-            var model = this._repository.GetAll();
+            IEnumerable<Film> model = _repository.GetAll();
             return View(model);
         }
 
         [HttpGet]
         public ActionResult Film(int id)
         {
-            var model = new List<Film>{this._repository.GetById(id)};
+            var model = new List<Film> {_repository.GetById(id)};
             return View(model);
         }
-	}
+    }
 }

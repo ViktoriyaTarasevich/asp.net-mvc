@@ -1,21 +1,21 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
     {
         @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a href=@Url.Action("Backet", "Account",new{id = @User.Identity.GetUserId()})>
-                <img src=@Url.Content(@String.Format("./../../Content/Images/Basket/basket.png")) />
-            </a>
-        </li>
-        <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null,htmlAttributes:"title")
-        </li>
-        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href=@Url.Action("Backet", "Account", new {id = @User.Identity.GetUserId()})>
+                    <img src=@Url.Content(@String.Format("./../../Content/Images/Basket/basket.png")) />
+                </a>
+            </li>
+            <li>
+                @Html.ActionLink(User.Identity.GetUserName(), "Manage", "Account", routeValues: null, htmlAttributes: "title")
+            </li>
+            <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+        </ul>
     }
 }
 else

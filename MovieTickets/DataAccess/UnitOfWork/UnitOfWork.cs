@@ -6,7 +6,7 @@ using DataAccess.Repository;
 
 namespace DataAccess.UnitOfWork
 {
-    public class UnitOfWork<TContext>: IUnitOfWork where TContext : DbContext, new()
+    public class UnitOfWork<TContext>: IUnitOfWork<TContext> where TContext : DbContext, new()
     {
         private TContext _context;
         private Dictionary<Type, object> _repositories;

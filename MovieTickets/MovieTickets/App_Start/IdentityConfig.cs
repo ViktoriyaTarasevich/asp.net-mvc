@@ -7,7 +7,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
+using MovieTickets.Context;
 using MovieTickets.Entities.Models;
+using MovieTickets.Migrations;
 
 namespace MovieTickets.App_Start
 {
@@ -18,30 +21,32 @@ namespace MovieTickets.App_Start
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
+                                                    IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<MovieTicketContext>()));
-     
+
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
-          
+                {
+                    AllowOnlyAlphanumericUserNames = false,
+                    RequireUniqueEmail = true
+                };
+
             manager.PasswordValidator = new PasswordValidator
-            {
-                //RequiredLength = 6,
-                //RequireNonLetterOrDigit = true,
-                //RequireDigit = true,
-                //RequireLowercase = true,
-                //RequireUppercase = true,
-            };
-          
+                {
+                    //RequiredLength = 6,
+                    //RequireNonLetterOrDigit = true,
+                    //RequireDigit = true,
+                    //RequireLowercase = true,
+                    //RequireUppercase = true,
+                };
+
             manager.EmailService = new EmailService();
-            var dataProtectionProvider = options.DataProtectionProvider;
+            IDataProtectionProvider dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
@@ -63,42 +68,7 @@ namespace MovieTickets.App_Start
         }
     }
 
-    public class ApplicationUser : IdentityUser
-    {
-        [Required]
-        public string FirstName { get; set; }
-        [Required]
-        public string SurName { get; set; }
-        public int RoleId { get; set; }
-        public virtual ICollection<IpStory> IpStories { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; } 
+    
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            return userIdentity;
-        }
-    }
-
-    public class MovieTicketContext : IdentityDbContext<ApplicationUser>
-    {
-       
-        public MovieTicketContext()
-            : base("MovieTicketContext", throwIfV1Schema: false)
-        {
-            
-        }
-        public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<TicketCategory> TicketCategories { get; set; }
-        public DbSet<TicketPrice> TicketPrices { get; set; }
-        public DbSet<Seance> Seances { get; set; }
-        public DbSet<Place> Places { get; set; }
-        public DbSet<Film> Films { get; set; }
-        public DbSet<IpStory> IpStories { get; set; }
-
-        public static MovieTicketContext Create()
-        {
-            return new MovieTicketContext();
-        }
-    }
+    
 }

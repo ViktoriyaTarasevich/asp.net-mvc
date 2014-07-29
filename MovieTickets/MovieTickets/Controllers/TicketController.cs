@@ -7,6 +7,7 @@ using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using MovieTickets.App_Start;
+using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 using MovieTickets.ViewModels;
 
@@ -14,33 +15,33 @@ namespace MovieTickets.Controllers
 {
     public class TicketController : Controller
     {
-        private UnitOfWork<MovieTicketContext> _unitOfWork;
-        private IRepository<Ticket> _repository;
+        private readonly IRepository<Ticket> _repository;
+        private readonly IUnitOfWork<MovieTicketContext> _unitOfWork;
 
-        public TicketController()
+        public TicketController(IUnitOfWork<MovieTicketContext> uof)
         {
-            this._unitOfWork = new UnitOfWork<MovieTicketContext>();
-            this._repository = _unitOfWork.GetRepository<Ticket>();
+            _unitOfWork = uof;
+            _repository = _unitOfWork.GetRepository<Ticket>();
         }
+
         // GET: Ticket
 
         [HttpGet]
         public ActionResult GetSeance(int idFilm)
         {
             var model = new HallViewModel();
-            var seanceRepository = this._unitOfWork.GetRepository<Seance>();
-            var seances = seanceRepository.GetAll();
+            IRepository<Seance> seanceRepository = _unitOfWork.GetRepository<Seance>();
+            IEnumerable<Seance> seances = seanceRepository.GetAll();
             model.Seances = new List<SelectListItem>();
-            foreach (var seance in seances)
+            foreach (Seance seance in seances)
             {
                 if (seance.FilmId == idFilm)
                 {
                     model.Seances.Add(new SelectListItem
                         {
-                            Text = (seance.Date.ToShortDateString() + " : " + seance.Time.ToShortTimeString()), 
+                            Text = (seance.Date.ToShortDateString() + " : " + seance.Time.ToShortTimeString()),
                             Value = seance.Id.ToString(CultureInfo.InvariantCulture)
                         });
-
                 }
             }
             return View(model);
@@ -52,15 +53,17 @@ namespace MovieTickets.Controllers
             return RedirectToAction("Hall", "Ticket", new {idSeance = model.SeanceId});
         }
 
-        
+
         [HttpGet]
         public ActionResult Hall(int idSeance)
         {
             var model = new HallViewModel();
-            var tickets = this._repository.GetAll();
-            var array = (from ticket in tickets where ticket.ApplicationUserId != null select ticket).ToList();
+            ViewBag.SeanceId = idSeance;
+            model.SeanceId = idSeance;
+            IEnumerable<Ticket> tickets = _repository.GetAll();
+            List<Ticket> array = (from ticket in tickets where ticket.ApplicationUserId != null select ticket).ToList();
             model.PlacesId = new List<int>();
-            foreach (var i in array)
+            foreach (Ticket i in array)
             {
                 model.PlacesId.Add(i.PlaceId);
             }
@@ -70,18 +73,16 @@ namespace MovieTickets.Controllers
         [HttpPost]
         public ActionResult Hall(HallViewModel model, string[] data)
         {
-            var ticketRepository = _unitOfWork.GetRepository<Ticket>();
-            foreach (var place in data.Select(x => x != ""))
+            string[] datas = data;
+            _unitOfWork.GetRepository<Ticket>().Insert(new Ticket
             {
-                ticketRepository.Insert(new Ticket()
-                {
-                    ApplicationUserId = User.Identity.GetUserId(),
-                    DateTimeBuy = DateTime.Now,
-                    //PlaceId = Int32.Parse(place),
-                    //SeanceId = seanceId
-                });
-            }
-            
+                ApplicationUserId = User.Identity.GetUserId(),
+                DateTimeBuy = DateTime.Now,
+                PlaceId = Int32.Parse(datas[0]),
+                SeanceId = model.SeanceId
+            });
+            _unitOfWork.Save();
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -92,8 +93,8 @@ namespace MovieTickets.Controllers
 
         public ActionResult Delete(int id)
         {
-            this._repository.Delete(this._repository.GetById(id));
-            this._unitOfWork.Save();
+            _repository.Delete(_repository.GetById(id));
+            _unitOfWork.Save();
             return RedirectToAction("Backet", "Account");
         }
     }

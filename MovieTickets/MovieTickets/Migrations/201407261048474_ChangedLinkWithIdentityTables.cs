@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace MovieTickets.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class ChangedLinkWithIdentityTables : DbMigration
     {
         public override void Up()
@@ -12,7 +11,7 @@ namespace MovieTickets.Migrations
             DropColumn("dbo.Tickets", "AspNetUserId");
             DropColumn("dbo.IpStories", "AspNetUserId");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.IpStories", "AspNetUserId", c => c.Int(nullable: false));

@@ -20,8 +20,5 @@ namespace MovieTickets.ViewModels
 
         [Required]
         public int Price { get; set; }
-
-        
-
     }
 }

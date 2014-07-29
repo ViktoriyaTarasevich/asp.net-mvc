@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
+using MovieTickets;
 using Owin;
 
-[assembly: OwinStartup(typeof(MovieTickets.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace MovieTickets
 {
     public partial class Startup

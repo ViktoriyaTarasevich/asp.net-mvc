@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace MovieTickets.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class Initial : DbMigration
     {
         public override void Up()
@@ -17,7 +16,7 @@ namespace MovieTickets.Migrations
                         Image = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.Seances",
                 c => new
@@ -30,7 +29,7 @@ namespace MovieTickets.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Films", t => t.FilmId, cascadeDelete: true)
                 .Index(t => t.FilmId);
-            
+
             CreateTable(
                 "dbo.TicketPrices",
                 c => new
@@ -45,7 +44,7 @@ namespace MovieTickets.Migrations
                 .ForeignKey("dbo.TicketCategories", t => t.TicketCategoryId, cascadeDelete: true)
                 .Index(t => t.TicketCategoryId)
                 .Index(t => t.SeanceId);
-            
+
             CreateTable(
                 "dbo.Tickets",
                 c => new
@@ -62,7 +61,7 @@ namespace MovieTickets.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.SeanceId)
                 .Index(t => t.ApplicationUser_Id);
-            
+
             CreateTable(
                 "dbo.IpStories",
                 c => new
@@ -77,7 +76,7 @@ namespace MovieTickets.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.ApplicationUser_Id);
-            
+
             CreateTable(
                 "dbo.Places",
                 c => new
@@ -90,7 +89,7 @@ namespace MovieTickets.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.TicketCategories", t => t.TicketCategoryId, cascadeDelete: true)
                 .Index(t => t.TicketCategoryId);
-            
+
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -100,7 +99,7 @@ namespace MovieTickets.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
+
             CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
@@ -108,12 +107,12 @@ namespace MovieTickets.Migrations
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .PrimaryKey(t => new {t.UserId, t.RoleId})
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
+
             CreateTable(
                 "dbo.TicketCategories",
                 c => new
@@ -122,7 +121,7 @@ namespace MovieTickets.Migrations
                         Title = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
@@ -145,7 +144,7 @@ namespace MovieTickets.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
+
             CreateTable(
                 "dbo.AspNetUserClaims",
                 c => new
@@ -158,7 +157,7 @@ namespace MovieTickets.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
             CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
@@ -167,12 +166,11 @@ namespace MovieTickets.Migrations
                         ProviderKey = c.String(nullable: false, maxLength: 128),
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .PrimaryKey(t => new {t.LoginProvider, t.ProviderKey, t.UserId})
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Tickets", "ApplicationUser_Id", "dbo.AspNetUsers");
@@ -186,19 +184,19 @@ namespace MovieTickets.Migrations
             DropForeignKey("dbo.Seances", "FilmId", "dbo.Films");
             DropForeignKey("dbo.Tickets", "SeanceId", "dbo.Seances");
             DropForeignKey("dbo.TicketPrices", "SeanceId", "dbo.Seances");
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] {"UserId"});
+            DropIndex("dbo.AspNetUserClaims", new[] {"UserId"});
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserRoles", new[] {"RoleId"});
+            DropIndex("dbo.AspNetUserRoles", new[] {"UserId"});
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Places", new[] { "TicketCategoryId" });
-            DropIndex("dbo.IpStories", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Tickets", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Tickets", new[] { "SeanceId" });
-            DropIndex("dbo.TicketPrices", new[] { "SeanceId" });
-            DropIndex("dbo.TicketPrices", new[] { "TicketCategoryId" });
-            DropIndex("dbo.Seances", new[] { "FilmId" });
+            DropIndex("dbo.Places", new[] {"TicketCategoryId"});
+            DropIndex("dbo.IpStories", new[] {"ApplicationUser_Id"});
+            DropIndex("dbo.Tickets", new[] {"ApplicationUser_Id"});
+            DropIndex("dbo.Tickets", new[] {"SeanceId"});
+            DropIndex("dbo.TicketPrices", new[] {"SeanceId"});
+            DropIndex("dbo.TicketPrices", new[] {"TicketCategoryId"});
+            DropIndex("dbo.Seances", new[] {"FilmId"});
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

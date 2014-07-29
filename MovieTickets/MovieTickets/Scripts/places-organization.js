@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var setPlaces = function (arg) {
+var setPlaces = function(arg) {
     var reservedSeats = arg;
     $('.hall').append('<p>--------------------------Экран-------------------------</p>');
     $('.hall').append('<br/>');
@@ -10,10 +10,10 @@ var setPlaces = function (arg) {
         for (var j = 0; j < 10; j++) {
             if (k == reservedSeats[0]) {
                 $('.hall').append('<a id = "' +
-                   (k++) +
-                   '" class = "place reservedSeat" title = "' +
-                   (j + 1) +
-                   '"><img src = "./../../Content/Images/Seats/reservedseat.jpg" class = "reservedSeat"/></a>');
+                    (k++) +
+                    '" class = "place reservedSeat" title = "' +
+                    (j + 1) +
+                    '"><img src = "./../../Content/Images/Seats/reservedseat.jpg" class = "reservedSeat"/></a>');
             } else {
                 $('.hall').append('<a id = "' +
                     (k++) +
@@ -30,13 +30,14 @@ var setPlaces = function (arg) {
     }
 };
 
-function getData() {
-    $.ajax({
-        url: '@Url.Action("Hall", "Ticket")',
-        type: "POST",
-        data: { data: setSelectedPlaceId() },
-        dataType: "html"
-    });
+function getParseData(places) {
+    var result = [];
+    for (var i = 0; i < places.length; i++) {
+        if (places[i] != "") {
+            result.push(places[i]);
+        }
+    }
+    return result;
 }
 
 function setRowsTitle(i) {
@@ -45,13 +46,12 @@ function setRowsTitle(i) {
         element.append('<span>' + (i + 1) + 'V</span>');
     } else if (i === 4) {
         element.append('<span>' + (i + 1) + 'B</span>');
-    }
-    else {
+    } else {
         element.append('<span>' + (i + 1) + 'C</span>');
     }
 }
 
-$(document.body).on('click', '.place', function () {
+$(document.body).on('click', '.place', function() {
     var element = $(this);
     if (element.hasClass('selectedSeat')) {
         element.removeClass('selectedSeat');
@@ -60,23 +60,23 @@ $(document.body).on('click', '.place', function () {
     }
     if (element.hasClass('reservedSeat')) {
         return;
-    }
-    else {
+    } else {
         element.addClass('selectedSeat');
         element.find('.vacantSeat').remove();
         element.html('<img src = "./../../Content/Images/Seats/selectedseat.jpg" class = "selectedSeat"/>');
         return;
     }
-    
+
 });
 
 function setSelectedPlaceId() {
     var elements = $('.selectedSeat');
     var places = [];
-    elements.each(function () {
+    elements.each(function() {
         places.push(this.id);
     });
 
     return places;
-};
+}
 
+;

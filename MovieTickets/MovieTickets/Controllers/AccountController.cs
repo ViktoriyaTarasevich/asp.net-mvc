@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieTickets.App_Start;
+using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
 {
-
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -32,17 +32,17 @@ namespace MovieTickets.Controllers
 
         public ApplicationUserManager UserManager
         {
-            get { return _userManager ??  HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
             private set { _userManager = value; }
         }
 
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public  ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            
+
             return View();
         }
 
@@ -55,12 +55,11 @@ namespace MovieTickets.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Name, model.Password);
+                ApplicationUser user = await UserManager.FindAsync(model.Name, model.Password);
                 if (user != null)
                 {
-                    
                     await SignInAsync(user, model.RememberMe);
-                    
+
                     return RedirectToLocal(returnUrl);
                 }
                 ModelState.AddModelError("", "Invalid username or password.");
@@ -85,7 +84,13 @@ namespace MovieTickets.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {UserName = model.Name, Email = model.Email, FirstName = model.Name, SurName = model.SurName};
+                var user = new ApplicationUser
+                    {
+                        UserName = model.Name,
+                        Email = model.Email,
+                        FirstName = model.Name,
+                        SurName = model.SurName
+                    };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -101,36 +106,36 @@ namespace MovieTickets.Controllers
         public ActionResult LogOff()
         {
             var uow = new UnitOfWork<MovieTicketContext>();
-            var repository = uow.GetRepository<IpStory>();
+            IRepository<IpStory> repository = uow.GetRepository<IpStory>();
             if (User.Identity.GetUserId() != null)
             {
-                repository.Insert(new IpStory()
-                {
-                    Time = DateTime.Now,
-                    Ip = Request.UserHostAddress,
-                    ApplicationUserId = User.Identity.GetUserId()
-                });
+                repository.Insert(new IpStory
+                    {
+                        Time = DateTime.Now,
+                        Ip = Request.UserHostAddress,
+                        ApplicationUserId = User.Identity.GetUserId()
+                    });
             }
 
             uow.Save();
             AuthenticationManager.SignOut();
-            
+
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Manage()
         {
             var uow = new UnitOfWork<MovieTicketContext>();
-           
-            
-            var userRepository = uow.GetRepository<ApplicationUser>();
-            var userinf = userRepository.GetById(User.Identity.GetUserId());
-            var model = new ManageUserViewModel()
-            {
-                SurName = userinf.SurName,
-                Email = userinf.Email,
-                IpStories = userinf.IpStories
-            };
+
+
+            IRepository<ApplicationUser> userRepository = uow.GetRepository<ApplicationUser>();
+            ApplicationUser userinf = userRepository.GetById(User.Identity.GetUserId());
+            var model = new ManageUserViewModel
+                {
+                    SurName = userinf.SurName,
+                    Email = userinf.Email,
+                    IpStories = userinf.IpStories
+                };
 
             return View(model);
         }
@@ -148,18 +153,19 @@ namespace MovieTickets.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    IdentityResult result =
+                        await
+                        UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
-                        
-                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                         await SignInAsync(user, false);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
                     }
                     AddErrors(result);
                 }
             }
-            
+
             return View(model);
         }
 
@@ -169,23 +175,28 @@ namespace MovieTickets.Controllers
             if (id == User.Identity.GetUserId())
             {
                 var uow = new UnitOfWork<MovieTicketContext>();
-                var repository = uow.GetRepository<Ticket>();
-                var tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
-                var placesRepository = uow.GetRepository<Place>();
-                var seanceRepository = uow.GetRepository<Seance>();
-                var filmRepository = uow.GetRepository<Film>();
-                var priceRepository = uow.GetRepository<TicketPrice>();
-                var ticketCategoryRepository = uow.GetRepository<TicketCategory>();
-                var ticketsModel = (from ticket in tickets
-                    let place = placesRepository.GetById(ticket.PlaceId)
-                    let seance = seanceRepository.GetById(ticket.SeanceId)
-                    let film = filmRepository.GetById(seance.FilmId)
-                    let price = priceRepository.GetById(seance.TicketPriceId)
-                    let category = ticketCategoryRepository.GetById(place.TicketCategoryId)
-                    select new TicketViewModels
-                    {
-                        Id = ticket.Id, Row = place.Row, Column = place.Col, Film = film.Title, Price = price.Price*category.PriceCoef
-                    }).ToList();
+                IRepository<Ticket> repository = uow.GetRepository<Ticket>();
+                List<Ticket> tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
+                IRepository<Place> placesRepository = uow.GetRepository<Place>();
+                IRepository<Seance> seanceRepository = uow.GetRepository<Seance>();
+                IRepository<Film> filmRepository = uow.GetRepository<Film>();
+                IRepository<TicketPrice> priceRepository = uow.GetRepository<TicketPrice>();
+                IRepository<TicketCategory> ticketCategoryRepository = uow.GetRepository<TicketCategory>();
+                List<TicketViewModels> ticketsModel = (from ticket in tickets
+                                                       let place = placesRepository.GetById(ticket.PlaceId)
+                                                       let seance = seanceRepository.GetById(ticket.SeanceId)
+                                                       let film = filmRepository.GetById(seance.FilmId)
+                                                       let price = priceRepository.GetById(seance.TicketPriceId)
+                                                       let category =
+                                                           ticketCategoryRepository.GetById(place.TicketCategoryId)
+                                                       select new TicketViewModels
+                                                           {
+                                                               Id = ticket.Id,
+                                                               Row = place.Row,
+                                                               Column = place.Col,
+                                                               Film = film.Title,
+                                                               Price = price.Price*category.PriceCoef
+                                                           }).ToList();
                 return View(ticketsModel);
             }
             return Redirect("Error");
@@ -193,47 +204,47 @@ namespace MovieTickets.Controllers
 
         #region Helpers
 
-        private bool HasPassword()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            var givenName = user.FirstName;
-
-            identity.AddClaim(new Claim(ClaimTypes.GivenName, givenName));
-
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
         public enum ManageMessageId
         {
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
             Error
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get { return HttpContext.GetOwinContext().Authentication; }
+        }
+
+        private bool HasPassword()
+        {
+            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.PasswordHash != null;
+            }
+            return false;
+        }
+
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            ClaimsIdentity identity =
+                await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            string givenName = user.FirstName;
+
+            identity.AddClaim(new Claim(ClaimTypes.GivenName, givenName));
+
+            AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent}, identity);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (string error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
@@ -245,7 +256,6 @@ namespace MovieTickets.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-       
         #endregion
     }
 }

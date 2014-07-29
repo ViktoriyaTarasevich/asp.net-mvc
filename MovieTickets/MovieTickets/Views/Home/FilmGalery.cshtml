@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MovieTickets.Entities.Models.Film>
+﻿@using MovieTickets.Entities.Models
+@model IEnumerable<MovieTickets.Entities.Models.Film>
 
 @{
     ViewBag.Title = "Фильмы";
@@ -21,7 +22,7 @@
     </tr>
     @if (Model != null)
     {
-        foreach (var item in Model)
+        foreach (Film item in Model)
         {
             <tr>
                 <td>
@@ -29,7 +30,7 @@
                 </td>
                 <td>
 
-                    <img src=@String.Format("./../../Content/Images/"+item.Image) />
+                    <img src=@String.Format("./../../Content/Images/" + item.Image) />
 
                 </td>
                 <td>
