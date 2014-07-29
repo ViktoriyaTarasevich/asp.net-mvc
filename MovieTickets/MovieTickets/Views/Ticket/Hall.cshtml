@@ -20,18 +20,19 @@
 
     function getData() {
         $.ajax({
-            url: '@Url.Action("Hall", "Ticket")',
+            url: "./Hall/Ticket",
             type: "POST",
-            data: { data: getParseData(setSelectedPlaceId()) },
-            traditional: true,
+            data: {
+                data: getParseData(setSelectedPlaceId()),
+                seanceId : @Model.SeanceId
+            },
+            success: function () {
+                window.location.href = response.Url;
+            }
+            
+
         });
     }
 </script>
-@Model.SeanceId;
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.SeanceId, new {@value = Model.SeanceId})
-    @Html.HiddenFor(model => model.PlacesId, new {@id = "places"})
-    <input type="submit" onclick=" getData() " value="Добавить в корзину"/>
-}
+
+<input type="submit" onclick=" getData() " value="Добавить в корзину"/>

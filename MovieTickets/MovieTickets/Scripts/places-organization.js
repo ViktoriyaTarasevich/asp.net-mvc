@@ -8,7 +8,7 @@ var setPlaces = function(arg) {
     for (var i = 0; i < 5; i++) {
         setRowsTitle(i);
         for (var j = 0; j < 10; j++) {
-            if (k == reservedSeats[0]) {
+            if (!isContainsInArray(k,reservedSeats)) {
                 $('.hall').append('<a id = "' +
                     (k++) +
                     '" class = "place reservedSeat" title = "' +
@@ -30,10 +30,19 @@ var setPlaces = function(arg) {
     }
 };
 
+function isContainsInArray(k,reservedSeats) {
+    for (var i = 0; i < reservedSeats.length; i++) {
+        if (k === reservedSeats[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function getParseData(places) {
     var result = [];
     for (var i = 0; i < places.length; i++) {
-        if (places[i] != "") {
+        if (places[i] !== "") {
             result.push(places[i]);
         }
     }

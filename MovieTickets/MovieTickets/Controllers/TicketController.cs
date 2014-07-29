@@ -71,19 +71,22 @@ namespace MovieTickets.Controllers
         }
 
         [HttpPost]
-        public ActionResult Hall(HallViewModel model, string[] data)
+        public ActionResult Hall(int seanceId, string[] data)
         {
             string[] datas = data;
-            _unitOfWork.GetRepository<Ticket>().Insert(new Ticket
+            foreach (var s in datas)
             {
-                ApplicationUserId = User.Identity.GetUserId(),
-                DateTimeBuy = DateTime.Now,
-                PlaceId = Int32.Parse(datas[0]),
-                SeanceId = model.SeanceId
-            });
+                _unitOfWork.GetRepository<Ticket>().Insert(new Ticket
+                {
+                    ApplicationUserId = User.Identity.GetUserId(),
+                    DateTimeBuy = DateTime.Now,
+                    PlaceId = Int32.Parse(s),
+                    SeanceId = seanceId
+                });
+            }
+            
             _unitOfWork.Save();
-
-            return RedirectToAction("Index", "Home");
+            return View("Hall",new{idSeance = seanceId});
         }
 
         public ActionResult NewTickets()
