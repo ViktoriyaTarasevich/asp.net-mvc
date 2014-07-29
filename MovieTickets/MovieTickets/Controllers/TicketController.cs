@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
+using Microsoft.AspNet.Identity;
 using MovieTickets.App_Start;
-using MovieTickets.Models;
+using MovieTickets.Entities.Models;
 using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
@@ -37,7 +37,7 @@ namespace MovieTickets.Controllers
                 {
                     model.Seances.Add(new SelectListItem
                         {
-                            Text = (seance.Date.ToShortDateString() + ":" + seance.Time.ToShortTimeString()), 
+                            Text = (seance.Date.ToShortDateString() + " : " + seance.Time.ToShortTimeString()), 
                             Value = seance.Id.ToString(CultureInfo.InvariantCulture)
                         });
 
@@ -68,9 +68,20 @@ namespace MovieTickets.Controllers
         }
 
         [HttpPost]
-        public ActionResult Hall(HallViewModel model,object data)
+        public ActionResult Hall(HallViewModel model, string[] data)
         {
-
+            var ticketRepository = _unitOfWork.GetRepository<Ticket>();
+            foreach (var place in data.Select(x => x != ""))
+            {
+                ticketRepository.Insert(new Ticket()
+                {
+                    ApplicationUserId = User.Identity.GetUserId(),
+                    DateTimeBuy = DateTime.Now,
+                    //PlaceId = Int32.Parse(place),
+                    //SeanceId = seanceId
+                });
+            }
+            
             return RedirectToAction("Index", "Home");
         }
 

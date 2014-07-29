@@ -1,11 +1,13 @@
-﻿@model MovieTickets.ViewModels.HallViewModel
+﻿@using System.Web.Optimization
+@model MovieTickets.ViewModels.HallViewModel
 
 @{
     ViewBag.Title = "Hall";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="../../Scripts/places-organization.js"></script>
+@Scripts.Render("~/Scripts/custom-place-organization")
+
 <div class="container">
     <div class="hall">
 
@@ -15,24 +17,12 @@
     $(document).ready(function () {
         setPlaces(@Html.Raw(Json.Encode(Model.PlacesId)));
     });
-
-    function getData() {
-        $.ajax({
-           url: '@Url.Action("Hall", "Ticket")',
-           type: "POST",
-           data: { data: setSelectedPlaceId() },
-           dataType: "html"
-       });
-    }
-   
 </script>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     @Html.HiddenFor(model=>model.PlacesId,new {  @id = "places" })
-    
     <input type="submit" onclick="getData()" value="Добавить в корзину"/>
 }
 

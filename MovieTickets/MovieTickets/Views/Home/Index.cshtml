@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieTickets.Models.Film>
+﻿@model IEnumerable<MovieTickets.Entities.Models.Film>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +15,7 @@
                 <ul>
                     <li>
                         <a href=@Url.Action("Film", "Home",new{id = item.Id})>
-                            <img src=@Url.Content(@String.Format("./../../Content/Images/"+item.Image)) />
+                            <img src=@Url.Content("~/Content/Images/"+item.Image) />
                         </a>
                     </li>
                     <li class="position">

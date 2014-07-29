@@ -1,18 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using BusinessLogic;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieTickets.App_Start;
-using MovieTickets.Models;
+using MovieTickets.Entities.Models;
 using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers

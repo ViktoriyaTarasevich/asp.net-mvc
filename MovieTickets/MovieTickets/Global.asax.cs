@@ -1,11 +1,9 @@
 ﻿using System.Data.Entity;
-using System.Threading;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using MovieTickets.App_Start;
 using MovieTickets.Migrations;
-using MovieTickets.Models;
-using WebMatrix.WebData;
 
 namespace MovieTickets
 {
@@ -15,6 +13,7 @@ namespace MovieTickets
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MovieTicketContext, Configuration>());
         }
     }

@@ -3,7 +3,8 @@ using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.App_Start;
-using MovieTickets.Models;
+using MovieTickets.Entities.Models;
+
 
 namespace MovieTickets.Controllers
 {
