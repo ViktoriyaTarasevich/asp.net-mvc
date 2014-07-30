@@ -41,8 +41,9 @@
                 </td>
            
                 <td>
-         
-                    @Html.ActionLink(linkText: "Удалить", actionName: "Delete", controllerName: "Ticket", htmlAttributes: new {id = item.Id})
+                    <a href=@Url.Action("Delete", "Ticket", new {id = item.Id})>Удалить</a>
+
+               
                 </td>
             </tr>
         }

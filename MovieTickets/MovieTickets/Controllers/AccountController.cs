@@ -22,7 +22,7 @@ namespace MovieTickets.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController( )
         {
         }
 
@@ -148,6 +148,8 @@ namespace MovieTickets.Controllers
 
             return View(model);
         }
+
+        
 
         //
         // POST: /Account/Manage

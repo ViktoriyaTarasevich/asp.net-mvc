@@ -71,18 +71,21 @@ namespace MovieTickets.Controllers
 
         }
 
-        public ActionResult NewTickets()
-        {
-            return PartialView();
-        }
-
         [HttpGet]
         public ActionResult Delete(int id)
         {
             var repository = _unitOfWork.GetRepository<Ticket>();
             repository.Delete(repository.GetById(id));
             _unitOfWork.Save();
-            return RedirectToAction("Backet", "Account");
+            return RedirectToAction("Index", "Home");
         }
+
+
+        public ActionResult NewTickets()
+        {
+            return PartialView();
+        }
+
+        
     }
 }

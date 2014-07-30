@@ -70,7 +70,8 @@ namespace MovieTickets.Controllers
             {
                 var priceRepository = _unitOfWork.GetRepository<TicketPrice>();
                 var price = new TicketPrice {Price = model.Price};
-                priceRepository.Insert(price);
+                priceRepository.Insert(price); 
+                _unitOfWork.Save();
                 var senceRepository = _unitOfWork.GetRepository<Seance>();
                 var seance = new Seance {FilmId = id, Time = model.Time, Date = model.Date, TicketPriceId = price.Id};
                 senceRepository.Insert(seance);

@@ -21,8 +21,9 @@ namespace BusinessLogic
 
         public static List<int> GetReservedPlacesForSeance(IEnumerable<Ticket> tickets, int seanceId)
         {
-            var result = (from ticket in tickets
-                where ticket.ApplicationUserId != null && ticket.SeanceId == seanceId
+            List<Ticket> list = new List<Ticket>(tickets);
+            var result = (from ticket in list
+                where ticket.SeanceId == seanceId
                 select ticket.PlaceId).ToList();
             return result;
         }
