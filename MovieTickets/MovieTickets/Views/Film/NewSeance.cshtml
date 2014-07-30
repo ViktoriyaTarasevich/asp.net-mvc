@@ -5,73 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<h2>NewSeance</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Seance</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        
-        <script type="text/javascript">
-            $(document).ready(function() {
-                if (!Modernizr.inputtypes.date) {
-                    $(function() {
-                        $('input[name = "date"]')
-                            .datepicker()
-                            .get(0)
-                            .setAttribute("type", "text");
-                        $('input[name = "time"]').timepicker({
-                            minuteStep: 1,
-                            template: 'modal',
-                            appendWidgetTo: 'body',
-                            showSeconds: false,
-                            showMeridian: false,
-                            defaultTime: false
-                        });
-                    });
-
-                }
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        if (!Modernizr.inputtypes.date) {
+            $(function() {
+                $('input[name = "date"]')
+                    .datepicker()
+                    .get(0)
+                    .setAttribute("type", "text");
+                $('input[name = "time"]').timepicker({
+                    minuteStep: 1,
+                    template: 'modal',
+                    appendWidgetTo: 'body',
+                    showSeconds: false,
+                    showMeridian: false,
+                    defaultTime: false
+                });
             });
+        }
+    });
 
-        </script>
+</script>
+<h2>NewSeance</h2>
+@if (User.IsInRole("admin"))
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, "", "date")
-                @Html.ValidationMessageFor(model => model.Date)
-            </div>
-        </div>
-        
-        <div class="input-append bootstrap-timepicker">
+        <div class="form-horizontal">
+            <h4>Seance</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
             <div class="form-group">
-                @Html.LabelFor(model => model.Time, new {@class = "control-label col-md-2"})
+                @Html.LabelFor(model => model.Date, new {@class = "control-label col-md-2"})
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Time, "", "time")
-                    @Html.ValidationMessageFor(model => model.Time)
+                    @Html.EditorFor(model => model.Date, "", "date")
+                    @Html.ValidationMessageFor(model => model.Date)
+                </div>
+            </div>
+        
+            <div class="input-append bootstrap-timepicker">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Time, new {@class = "control-label col-md-2"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Time, "", "time")
+                        @Html.ValidationMessageFor(model => model.Time)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Price)
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Добавить сеанс" class="btn btn-default" />
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, new {@class = "control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price)
-                @Html.ValidationMessageFor(model => model.Price)
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Добавить сеанс" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    }
 }
-
 <div>
     @Html.ActionLink("На главную", "Index", "Home")
 </div>

@@ -24,7 +24,8 @@ namespace MovieTickets.App_Start
                 "~/Scripts/modernizr-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/custom-place-organization").Include(
-                "~/Scripts/places-organization.js"));
+                "~/Scripts/places-organization.js",
+                "~/Scripts/jquery.hallRender.js"));
 
             bundles.Add(new StyleBundle("~/Content/site").Include(
                 "~/Content/Site.css"));

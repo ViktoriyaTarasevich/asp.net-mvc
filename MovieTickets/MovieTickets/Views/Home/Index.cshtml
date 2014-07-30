@@ -1,10 +1,11 @@
 ﻿@using MovieTickets.Entities.Models
-@model IEnumerable<MovieTickets.Entities.Models.Film>
+@model IEnumerable<Film>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="container">
     @if (Model != null)
     {

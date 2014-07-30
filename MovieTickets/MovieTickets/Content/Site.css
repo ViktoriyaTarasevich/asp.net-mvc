@@ -26,8 +26,15 @@
     margin-top: 10px;
 }
 
-.hall { margin: auto; }
+.hall {
+    margin-left: 25%;
+    margin-top: 100px;
+}
 
+.textarea {
+    min-width: 500px;
+    min-height: 300px;
+}
 .place { margin: 5px; }
 
 .vacantSeat, .reservedSeat, .selectedSeat { margin-bottom: 5px; }

@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using MovieTickets.HtmlHelpers
 @model MovieTickets.ViewModels.HallViewModel
 
 @{
@@ -15,7 +16,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        setPlaces(@Html.Raw(Json.Encode(Model.PlacesId)));
+        $('.hall').hallRender(@Html.Raw(Json.Encode(Model.PlacesId)));
     });
 
     function getData() {
@@ -23,11 +24,11 @@
             url: "./Hall/Ticket",
             type: "POST",
             data: {
-                data: getParseData(setSelectedPlaceId()),
+                data: getSelectedPlaceId(),
                 seanceId : @Model.SeanceId
             },
             success: function () {
-                
+                window.location.href = '@(Html.ActionUri("Index", "Home"))';
             }
             
 
