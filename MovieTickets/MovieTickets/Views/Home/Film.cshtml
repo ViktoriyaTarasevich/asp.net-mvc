@@ -10,13 +10,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Название
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            Постер
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Описание
         </th>
         <th></th>
     </tr>
@@ -37,7 +37,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-            
+                <td>
+                    <a href=@Url.Action("GetSeance", "Ticket", new {filmID = item.Id})>Купить билет</a>
+                </td>
             </tr>
         }
     }

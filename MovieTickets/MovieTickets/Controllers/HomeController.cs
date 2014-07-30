@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
-using MovieTickets.App_Start;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 
@@ -11,12 +12,10 @@ namespace MovieTickets.Controllers
     public class HomeController : Controller
     {
         private readonly IRepository<Film> _repository;
-        private readonly IUnitOfWork<MovieTicketContext> _unitOfWork;
 
         public HomeController(IUnitOfWork<MovieTicketContext> uof)
         {
-            _unitOfWork = uof;
-            _repository = _unitOfWork.GetRepository<Film>();
+            _repository = uof.GetRepository<Film>();
         }
 
         //
@@ -39,6 +38,14 @@ namespace MovieTickets.Controllers
         {
             var model = new List<Film> {_repository.GetById(id)};
             return View(model);
+        }
+
+        public ActionResult FullTextSearch(string searchString)
+        {
+            IEnumerable<Film> model = _repository.GetAll();
+            var serchaResultModel = model.Where(x => x.Description.Contains(searchString) || x.Title.Contains(searchString)).ToList();
+
+            return View("FilmGalery", serchaResultModel);
         }
     }
 }

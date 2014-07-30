@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 
@@ -21,12 +22,19 @@ namespace DataAccess.Repository
 
         public TEntity GetById<T>(T id)
         {
-            return this._dbSet.Find(id);
+            if (id != null)
+            {
+                return this._dbSet.Find(id);
+            }
+            throw new NoNullAllowedException("entity");
         }
 
         public void Insert(TEntity entity)
         {
-            this._dbSet.Add(entity);
+            if (entity != null)
+            {
+                this._dbSet.Add(entity);
+            }
         }
 
         public void Update(TEntity entity)
@@ -36,7 +44,10 @@ namespace DataAccess.Repository
 
         public void Delete(TEntity entity)
         {
-            this._context.Set<TEntity>().Remove(entity);
+            if (entity != null)
+            {
+                this._context.Set<TEntity>().Remove(entity);
+            }
         }
     }
 }

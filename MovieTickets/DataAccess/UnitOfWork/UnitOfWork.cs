@@ -12,6 +12,8 @@ namespace DataAccess.UnitOfWork
         private Dictionary<Type, object> _repositories;
         private bool _disposed;
 
+        public TContext Context { get { return _context; } }
+
         public UnitOfWork()
         {
             this._context = new TContext();

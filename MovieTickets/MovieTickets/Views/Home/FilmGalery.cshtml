@@ -36,7 +36,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-
+                <td>
+                    <a href=@Url.Action("GetSeance", "Ticket", new {filmId = item.Id})>Купить билет</a>
+                </td>
             </tr>
         }
     }

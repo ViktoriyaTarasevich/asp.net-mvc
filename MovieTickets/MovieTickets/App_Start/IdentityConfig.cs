@@ -50,6 +50,31 @@ namespace MovieTickets.App_Start
             }
             return manager;
         }
+
+        public bool RoleExists(string name)
+        {
+            var rm = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new MovieTicketContext()));
+            return rm.RoleExists(name);
+        }
+
+
+        public bool CreateRole(string name)
+        {
+            var rm = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new MovieTicketContext()));
+            var idResult = rm.Create(new IdentityRole(name));
+            return idResult.Succeeded;
+        }
+
+        public static bool AddUserToRole(string userId, string roleName)
+        {
+            var um = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new MovieTicketContext()));
+            var idResult = um.AddToRole(userId, roleName);
+            return idResult.Succeeded;
+        }
+  
     }
 
     public class EmailService : IIdentityMessageService

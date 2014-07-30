@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieTickets.App_Start;
@@ -56,8 +57,10 @@ namespace MovieTickets.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationUser user = await UserManager.FindAsync(model.Name, model.Password);
+                
                 if (user != null)
                 {
+                    
                     await SignInAsync(user, model.RememberMe);
 
                     return RedirectToLocal(returnUrl);
@@ -92,6 +95,12 @@ namespace MovieTickets.Controllers
                         SurName = model.SurName
                     };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new UnitOfWork<MovieTicketContext>().Context));
+                if (!roleManager.RoleExists("user"))
+                {
+                    roleManager.Create(new IdentityRole("user"));
+                }
+                await UserManager.AddToRoleAsync(user.Id, "user");
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, false);
@@ -160,7 +169,7 @@ namespace MovieTickets.Controllers
                     {
                         ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                         await SignInAsync(user, false);
-                        return RedirectToAction("Manage", new {Message = ManageMessageId.ChangePasswordSuccess});
+                        return RedirectToAction("Manage", new {Message = ManageMessageId.CHANGE_PASSWORD_SUCCESS});
                     }
                     AddErrors(result);
                 }
@@ -206,10 +215,10 @@ namespace MovieTickets.Controllers
 
         public enum ManageMessageId
         {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            Error
+            CHANGE_PASSWORD_SUCCESS,
+            SET_PASSWORD_SUCCESS,
+            REMOVE_LOGIN_SUCCESS,
+            ERROR
         }
 
         private IAuthenticationManager AuthenticationManager

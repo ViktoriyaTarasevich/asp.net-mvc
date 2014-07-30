@@ -42,7 +42,7 @@ function isContainsInArray(k,reservedSeats) {
 function getParseData(places) {
     var result = [];
     for (var i = 0; i < places.length; i++) {
-        if (places[i] !== "") {
+        if (places[i] !== '') {
             result.push(places[i]);
         }
     }
@@ -86,6 +86,4 @@ function setSelectedPlaceId() {
     });
 
     return places;
-}
-
-;
+};

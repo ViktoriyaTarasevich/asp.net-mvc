@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTickets.Entities.Models
 {
-    public class TicketCategory
+    public class TicketCategory : EntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         [Required]
         public string Title { get; set; }
         public int PriceCoef { get; set; }

@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTickets.Entities.Models
 {
-    public class Place
+    public class Place : EntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public byte Col { get; set; }
         public byte Row { get; set; }
         public int TicketCategoryId { get; set; }

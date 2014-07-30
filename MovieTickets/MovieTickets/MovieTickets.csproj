@@ -321,6 +321,10 @@
     <Compile Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.Designer.cs">
       <DependentUpon>201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407291921595_AddedBaseModelWithId.cs" />
+    <Compile Include="Migrations\201407291921595_AddedBaseModelWithId.Designer.cs">
+      <DependentUpon>201407291921595_AddedBaseModelWithId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\HallViewModel.cs" />
@@ -425,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.resx">
       <DependentUpon>201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407291921595_AddedBaseModelWithId.resx">
+      <DependentUpon>201407291921595_AddedBaseModelWithId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

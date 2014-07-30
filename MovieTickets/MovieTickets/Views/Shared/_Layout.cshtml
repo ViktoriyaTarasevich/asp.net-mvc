@@ -29,14 +29,26 @@
                             @Html.ActionLink("Фильмы", "FilmGalery", "Home")
                         </li>
                         <li>
-                            @Html.ActionLink("Добавить фильм", "FilmControl", "Film")
+                            @if (User.IsInRole("admin"))
+                            {
+                                @Html.ActionLink("Добавить фильм", "FilmControl", "Film")
+                            }
                         </li>
                     </ul>
-                    @Html.Partial("_LoginRegisterPartial")
-                </div>
+                    
+                    @using (Html.BeginForm("FullTextSearch", "Home", FormMethod.Get, new { @class = "navbar-form navbar-right", @role = "search" }))
+                    {
+
+                        @Html.TextBox("SearchString")
+
+                        <button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-search"></span></button>
+   
+                    }
+        @Html.Partial("_LoginRegisterPartial")
+
+    </div>
             </div>
         </div>
-
         <div class="container body-content">
             @RenderBody()
             <hr />
