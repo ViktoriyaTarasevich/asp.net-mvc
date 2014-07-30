@@ -14,6 +14,10 @@
             setDistanceBetweenRows: setDefaultDistanceBetweenRows
         }, options);
 
+        var SELECTED_SEAT = 'selectedSeat';
+        var VACANT_SEAT = 'vacantSeat';
+        var RESERVED_SEAT = 'reservedSeat';
+        
         function setRowTitle(row) {
             if (row === 0 || row === 1) {
                 element.append('<span>' + (row + 1) + 'V</span>');
@@ -47,45 +51,44 @@
             return false;
         }
 
+        function createPlace(column, logo, className) {
+            element.append('<a id = "' +
+                (tempId++) +
+                '" class = "place '+ className +'" title = "' +
+                (column + 1) +
+                '"><img src = "' + logo + '" class = "'+className+'"/></a>');
+        }
+
         options.setScreenForHall();
         var tempId = options.startPlaceId;
         for (var i = 0; i < options.rowCount; i++) {
             options.setRowPlacesTitle(i);
             for (var j = 0; j < options.columnCount; j++) {
                 if (isContainsInArray(tempId)) {
-                    element.append('<a id = "' +
-                        (tempId++) +
-                        '" class = "place reservedSeat" title = "' +
-                        (j + 1) +
-                        '"><img src = "' + options.reservedSeatLogo + '" class = "reservedSeat"/></a>');
+                    createPlace(j, options.reservedSeatLogo, RESERVED_SEAT);
                 } else {
-                    element.append('<a id = "' +
-                    (tempId++) +
-                    '" class = "place" title = "' +
-                    (j + 1) +
-                    '"><img src = "' + options.vacantSeatLogo + '" class = "vacantSeat"/></a>');
+                    createPlace(j, options.vacantSeatLogo, VACANT_SEAT);
                 }
             }
             options.setRowPlacesTitle(i);
             setDefaultDistanceBetweenRows();
-        };
+        }
 
         $(document.body).on('click', '.place', function () {
             var clickElement = $(this);
-            if (clickElement.hasClass('selectedSeat')) {
-                clickElement.removeClass('selectedSeat');
-                clickElement.html('<img src = "' + options.vacantSeatLogo + '" class = "vacantSeat"/>');
+            if (clickElement.hasClass(SELECTED_SEAT)) {
+                clickElement.removeClass(SELECTED_SEAT);
+                clickElement.html('<img src = "' + options.vacantSeatLogo + '" class = "'+VACANT_SEAT+'"/>');
                 return;
             }
-            if (clickElement.hasClass('reservedSeat')) {
+            if (clickElement.hasClass(RESERVED_SEAT)) {
                 return;
             } else {
-                clickElement.addClass('selectedSeat');
-                clickElement.find('.vacantSeat').remove();
-                clickElement.html('<img src = "'+ options.selectedSeatLogo +'" class = "selectedSeat"/>');
+                clickElement.addClass(SELECTED_SEAT);
+                clickElement.find('.'+VACANT_SEAT).remove();
+                clickElement.html('<img src = "'+ options.selectedSeatLogo +'" class = "'+SELECTED_SEAT+'"/>');
                 return;
             }
-
         });
     };
 })(jQuery);

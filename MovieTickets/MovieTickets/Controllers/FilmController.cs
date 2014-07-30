@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic;
 using DataAccess.UnitOfWork;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
@@ -34,7 +36,6 @@ namespace MovieTickets.Controllers
             var repository = _unitOfWork.GetRepository<Film>();
             repository.Delete(repository.GetById(id));
             _unitOfWork.Save();
-            Film mod = repository.GetById(id);
             return RedirectToAction("FilmControl");
         }
 
@@ -69,9 +70,17 @@ namespace MovieTickets.Controllers
             if (ModelState.IsValid)
             {
                 var priceRepository = _unitOfWork.GetRepository<TicketPrice>();
-                var price = new TicketPrice {Price = model.Price};
-                priceRepository.Insert(price); 
-                _unitOfWork.Save();
+                TicketPrice price;
+                if (!TicketControllerHelper.IsTicketPriceIdInDataBase(priceRepository.GetAll(), model.Price))
+                {
+                    price = new TicketPrice {Price = model.Price};
+                    priceRepository.Insert(price);
+                    _unitOfWork.Save();
+                }
+                else
+                {
+                    price = priceRepository.GetAll().First(x => x.Price == model.Price);
+                }
                 var senceRepository = _unitOfWork.GetRepository<Seance>();
                 var seance = new Seance {FilmId = id, Time = model.Time, Date = model.Date, TicketPriceId = price.Id};
                 senceRepository.Insert(seance);

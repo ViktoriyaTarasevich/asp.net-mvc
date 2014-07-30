@@ -21,11 +21,16 @@ namespace BusinessLogic
 
         public static List<int> GetReservedPlacesForSeance(IEnumerable<Ticket> tickets, int seanceId)
         {
-            List<Ticket> list = new List<Ticket>(tickets);
+            var list = new List<Ticket>(tickets);
             var result = (from ticket in list
                 where ticket.SeanceId == seanceId
                 select ticket.PlaceId).ToList();
             return result;
+        }
+
+        public static bool IsTicketPriceIdInDataBase(IEnumerable<TicketPrice> ticketsPrice, int ticketPrice)
+        {
+            return ticketsPrice.Any(x => x.Price == ticketPrice);
         }
 
     }

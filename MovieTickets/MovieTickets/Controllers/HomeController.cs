@@ -47,5 +47,11 @@ namespace MovieTickets.Controllers
 
             return View("FilmGalery", serchaResultModel);
         }
+
+        public ActionResult BuyResult()
+        {
+            ViewBag.Action = "Потрачено.";
+            return View();
+        }
     }
 }
