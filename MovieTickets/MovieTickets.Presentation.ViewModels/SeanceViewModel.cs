@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MovieTickets.ViewModels
+namespace MovieTickets.Presentation.ViewModels
 {
     public class SeanceViewModel
     {

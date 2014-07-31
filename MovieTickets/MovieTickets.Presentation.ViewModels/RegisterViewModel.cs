@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieTickets.ViewModels
+namespace MovieTickets.Presentation.ViewModels
 {
     public class RegisterViewModel
     {

@@ -6,7 +6,7 @@ using BusinessLogic;
 using DataAccess.UnitOfWork;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
-using MovieTickets.ViewModels;
+using MovieTickets.Presentation.ViewModels;
 
 namespace MovieTickets.Controllers
 {
@@ -71,7 +71,7 @@ namespace MovieTickets.Controllers
             {
                 var priceRepository = _unitOfWork.GetRepository<TicketPrice>();
                 TicketPrice price;
-                if (!TicketControllerHelper.IsTicketPriceIdInDataBase(priceRepository.GetAll(), model.Price))
+                if (!TicketHelper.IsTicketPriceIdInDataBase(priceRepository.GetAll(), model.Price))
                 {
                     price = new TicketPrice {Price = model.Price};
                     priceRepository.Insert(price);

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
@@ -14,7 +15,7 @@ using Microsoft.Owin.Security;
 using MovieTickets.App_Start;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
-using MovieTickets.ViewModels;
+using MovieTickets.Presentation.ViewModels;
 
 namespace MovieTickets.Controllers
 {
@@ -135,10 +136,7 @@ namespace MovieTickets.Controllers
 
         public ActionResult Manage()
         {
-            var uow = new UnitOfWork<MovieTicketContext>();
-
-
-            IRepository<ApplicationUser> userRepository = uow.GetRepository<ApplicationUser>();
+            IRepository<ApplicationUser> userRepository = _unitOfWork.GetRepository<ApplicationUser>();
             ApplicationUser userinf = userRepository.GetById(User.Identity.GetUserId());
             var model = new ManageUserViewModel
                 {
@@ -149,8 +147,6 @@ namespace MovieTickets.Controllers
 
             return View(model);
         }
-
-        
 
         //
         // POST: /Account/Manage
@@ -189,27 +185,16 @@ namespace MovieTickets.Controllers
 
                 IRepository<Ticket> repository = _unitOfWork.GetRepository<Ticket>();
                 List<Ticket> tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
-                IRepository<Place> placesRepository = _unitOfWork.GetRepository<Place>();
-                IRepository<Seance> seanceRepository = _unitOfWork.GetRepository<Seance>();
-                IRepository<Film> filmRepository = _unitOfWork.GetRepository<Film>();
-                IRepository<TicketPrice> priceRepository = _unitOfWork.GetRepository<TicketPrice>();
-                IRepository<TicketCategory> ticketCategoryRepository = _unitOfWork.GetRepository<TicketCategory>();
-                List<TicketViewModels> ticketsModel = (from ticket in tickets
-                                                       where ticket.IsBought == false
-                                                       let place = placesRepository.GetById(ticket.PlaceId)
-                                                       let seance = seanceRepository.GetById(ticket.SeanceId)
-                                                       let film = filmRepository.GetById(seance.FilmId)
-                                                       let price = priceRepository.GetById(seance.TicketPriceId)
-                                                       let category =
-                                                           ticketCategoryRepository.GetById(place.TicketCategoryId)
-                                                       select new TicketViewModels
-                                                           {
-                                                               Id = ticket.Id,
-                                                               Row = place.Row,
-                                                               Column = place.Col,
-                                                               Film = film.Title,
-                                                               Price = price.Price*category.PriceCoef
-                                                           }).ToList();
+                
+
+                var ticketsModel = TicketHelper.GetInformationForBascket(
+                    _unitOfWork.GetRepository<TicketPrice>(),
+                    _unitOfWork.GetRepository<TicketCategory>(),
+                    tickets, 
+                    _unitOfWork.GetRepository<Film>(),
+                    _unitOfWork.GetRepository<Seance>(),
+                    _unitOfWork.GetRepository<Place>());
+
                 return View(ticketsModel);
             }
             return Redirect("Error");

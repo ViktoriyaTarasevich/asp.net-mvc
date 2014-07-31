@@ -5,7 +5,7 @@ using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
-using MovieTickets.ViewModels;
+using MovieTickets.Presentation.ViewModels;
 
 namespace MovieTickets.Controllers
 {
@@ -27,7 +27,7 @@ namespace MovieTickets.Controllers
         {
             var model = new HallViewModel();
             var seanceRepository = _unitOfWork.GetRepository<Seance>();
-            model.Seances = TicketControllerHelper.SetSeancesToSelectedListItems(seanceRepository.GetAll(), filmId);
+            model.Seances = TicketHelper.SetSeancesToSelectedListItems(seanceRepository.GetAll(), filmId);
             return View(model);
         }
 
@@ -45,7 +45,7 @@ namespace MovieTickets.Controllers
             var model = new HallViewModel
             {
                 SeanceId = idSeance,
-                PlacesId = TicketControllerHelper.GetReservedPlacesForSeance(repository.GetAll(), idSeance)
+                PlacesId = TicketHelper.GetReservedPlacesForSeance(repository.GetAll(), idSeance)
             };
             return View(model);
         }
