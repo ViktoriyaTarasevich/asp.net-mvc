@@ -37,6 +37,28 @@ namespace MovieTickets.Controllers
             return RedirectToAction("FilmControl");
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            IRepository<Film> repository = _unitOfWork.GetRepository<Film>();
+            var model = repository.GetById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Film model, HttpPostedFileBase file)
+        {
+            if (model.Title != null && model.Description != null && file != null)
+            {
+                IRepository<Film> repository = _unitOfWork.GetRepository<Film>();
+                model.Image = file.FileName;
+                repository.Update(model.Id,model);
+                _unitOfWork.Save();
+                return RedirectToAction("FilmControl","Film");
+            }
+            return View(model);
+        }
+
         public ActionResult Create()
         {
             return View();

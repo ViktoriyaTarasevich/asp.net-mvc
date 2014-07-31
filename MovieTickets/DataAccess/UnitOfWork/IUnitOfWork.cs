@@ -1,6 +1,7 @@
 ﻿using System;
 using DataAccess.Context;
 using DataAccess.Repository;
+using MovieTickets.Entities.Models;
 
 namespace DataAccess.UnitOfWork
 {

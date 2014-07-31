@@ -126,7 +126,7 @@ namespace MovieTickets.Controllers
                     });
             }
 
-            //_unitOfWork.Save();
+            _unitOfWork.Save();
             AuthenticationManager.SignOut();
 
             return RedirectToAction("Index", "Home");

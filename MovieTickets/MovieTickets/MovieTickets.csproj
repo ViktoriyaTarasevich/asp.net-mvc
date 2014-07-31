@@ -298,6 +298,7 @@
     <Content Include="Views\Ticket\_PartialHall.cshtml" />
     <Content Include="Views\Ticket\GetSeance.cshtml" />
     <Content Include="Views\Home\BuyResult.cshtml" />
+    <Content Include="Views\Film\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

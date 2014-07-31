@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using MovieTickets.Entities.Models;
 
 namespace DataAccess.Repository
 {
@@ -38,8 +39,16 @@ namespace DataAccess.Repository
             }
         }
 
-        public void Update(TEntity entity)
+        public void Update(int oldEntityId, TEntity entity)
         {
+            if (entity != null)
+            {
+                var original = _dbSet.Find(oldEntityId);
+                if (original != null)
+                {
+                    _context.Entry(original).CurrentValues.SetValues(entity);
+                }
+            }
         }
 
         public void Delete(TEntity entity)

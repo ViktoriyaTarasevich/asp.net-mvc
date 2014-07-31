@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Context;
 using DataAccess.Repository;
+using MovieTickets.Entities.Models;
 
 namespace DataAccess.UnitOfWork
 {
