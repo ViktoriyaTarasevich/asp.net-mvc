@@ -18,4 +18,6 @@ function getSelectedPlaceId() {
     });
 
     return getParseData(places);
-};
+}
+
+;

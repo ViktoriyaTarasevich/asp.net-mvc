@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
-using MovieTickets.Context;
-using MovieTickets.Entities.Models;
 using Microsoft.AspNet.Identity;
+using MovieTickets.Entities.Models;
 
 namespace MovieTickets.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IRepository<Film> _repository;
-        private IUnitOfWork<MovieTicketContext> _unitOfWork; 
-        public HomeController(IUnitOfWork<MovieTicketContext> uof)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HomeController(IUnitOfWork uof)
         {
             _unitOfWork = uof;
             _repository = uof.GetRepository<Film>();
-            
         }
 
         //
@@ -46,16 +44,17 @@ namespace MovieTickets.Controllers
         public ActionResult FullTextSearch(string searchString)
         {
             IEnumerable<Film> model = _repository.GetAll();
-            var serchaResultModel = model.Where(x => x.Description.Contains(searchString) || x.Title.Contains(searchString)).ToList();
+            List<Film> serchaResultModel =
+                model.Where(x => x.Description.Contains(searchString) || x.Title.Contains(searchString)).ToList();
 
             return View("FilmGalery", serchaResultModel);
         }
 
         public ActionResult BuyResult()
         {
-            var repository = _unitOfWork.GetRepository<Ticket>();
-            var tickets = repository.GetAll();
-            foreach (var ticket in tickets.Where(ticket => ticket.ApplicationUserId == User.Identity.GetUserId()))
+            IRepository<Ticket> repository = _unitOfWork.GetRepository<Ticket>();
+            IEnumerable<Ticket> tickets = repository.GetAll();
+            foreach (Ticket ticket in tickets.Where(ticket => ticket.ApplicationUserId == User.Identity.GetUserId()))
             {
                 ticket.IsBought = true;
             }

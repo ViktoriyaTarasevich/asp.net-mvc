@@ -13,7 +13,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MovieTickets.App_Start;
-using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 using MovieTickets.Presentation.ViewModels;
 
@@ -21,9 +20,10 @@ namespace MovieTickets.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
         private ApplicationUserManager _userManager;
-        private IUnitOfWork<MovieTicketContext> _unitOfWork; 
-        public AccountController(IUnitOfWork<MovieTicketContext> uof)
+
+        public AccountController(IUnitOfWork uof)
         {
             _unitOfWork = uof;
         }
@@ -59,10 +59,9 @@ namespace MovieTickets.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationUser user = await UserManager.FindAsync(model.Name, model.Password);
-                
+
                 if (user != null)
                 {
-                    
                     await SignInAsync(user, model.RememberMe);
 
                     return RedirectToLocal(returnUrl);
@@ -116,7 +115,6 @@ namespace MovieTickets.Controllers
 
         public ActionResult LogOff()
         {
-            
             IRepository<IpStory> repository = _unitOfWork.GetRepository<IpStory>();
             if (User.Identity.GetUserId() != null)
             {
@@ -128,7 +126,7 @@ namespace MovieTickets.Controllers
                     });
             }
 
-            _unitOfWork.Save();
+            //_unitOfWork.Save();
             AuthenticationManager.SignOut();
 
             return RedirectToAction("Index", "Home");
@@ -182,15 +180,14 @@ namespace MovieTickets.Controllers
         {
             if (id == User.Identity.GetUserId())
             {
-
                 IRepository<Ticket> repository = _unitOfWork.GetRepository<Ticket>();
                 List<Ticket> tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
-                
 
-                var ticketsModel = TicketHelper.GetInformationForBascket(
+
+                List<TicketViewModels> ticketsModel = TicketHelper.GetInformationForBascket(
                     _unitOfWork.GetRepository<TicketPrice>(),
                     _unitOfWork.GetRepository<TicketCategory>(),
-                    tickets, 
+                    tickets,
                     _unitOfWork.GetRepository<Film>(),
                     _unitOfWork.GetRepository<Seance>(),
                     _unitOfWork.GetRepository<Place>());

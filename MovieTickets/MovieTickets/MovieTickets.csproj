@@ -259,7 +259,6 @@
     <Compile Include="App_Start\IoCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Context\MovieTicketContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -268,71 +267,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\ActionHelper.cs" />
-    <Compile Include="Migrations\201407230813456_Initial.cs" />
-    <Compile Include="Migrations\201407230813456_Initial.Designer.cs">
-      <DependentUpon>201407230813456_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407240936325_ChangedFilmEntityAddedFlagForDelete.cs" />
-    <Compile Include="Migrations\201407240936325_ChangedFilmEntityAddedFlagForDelete.Designer.cs">
-      <DependentUpon>201407240936325_ChangedFilmEntityAddedFlagForDelete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407240945492_ChangedFilmEntity.cs" />
-    <Compile Include="Migrations\201407240945492_ChangedFilmEntity.Designer.cs">
-      <DependentUpon>201407240945492_ChangedFilmEntity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407250920142_ChangedOneToManyLinkBeetwenFilmsAndSeance.cs" />
-    <Compile Include="Migrations\201407250920142_ChangedOneToManyLinkBeetwenFilmsAndSeance.Designer.cs">
-      <DependentUpon>201407250920142_ChangedOneToManyLinkBeetwenFilmsAndSeance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.cs" />
-    <Compile Include="Migrations\201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.Designer.cs">
-      <DependentUpon>201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407261048474_ChangedLinkWithIdentityTables.cs" />
-    <Compile Include="Migrations\201407261048474_ChangedLinkWithIdentityTables.Designer.cs">
-      <DependentUpon>201407261048474_ChangedLinkWithIdentityTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407261057064_RestoredLinkWithIdentityTables.cs" />
-    <Compile Include="Migrations\201407261057064_RestoredLinkWithIdentityTables.Designer.cs">
-      <DependentUpon>201407261057064_RestoredLinkWithIdentityTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407261210175_ChangedAppUserIdType.cs" />
-    <Compile Include="Migrations\201407261210175_ChangedAppUserIdType.Designer.cs">
-      <DependentUpon>201407261210175_ChangedAppUserIdType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407261632131_ChangedDateTypeToDateTime2.cs" />
-    <Compile Include="Migrations\201407261632131_ChangedDateTypeToDateTime2.Designer.cs">
-      <DependentUpon>201407261632131_ChangedDateTypeToDateTime2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407271321101_AddedPricesIncreasingCoef.cs" />
-    <Compile Include="Migrations\201407271321101_AddedPricesIncreasingCoef.Designer.cs">
-      <DependentUpon>201407271321101_AddedPricesIncreasingCoef.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407271357369_RemovedLinkFromTicketPriceToTicketCategory.cs" />
-    <Compile Include="Migrations\201407271357369_RemovedLinkFromTicketPriceToTicketCategory.Designer.cs">
-      <DependentUpon>201407271357369_RemovedLinkFromTicketPriceToTicketCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs" />
-    <Compile Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.Designer.cs">
-      <DependentUpon>201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407280434267_ChangedLinkBeetwenPriceAndSeance.cs" />
-    <Compile Include="Migrations\201407280434267_ChangedLinkBeetwenPriceAndSeance.Designer.cs">
-      <DependentUpon>201407280434267_ChangedLinkBeetwenPriceAndSeance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs" />
-    <Compile Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.Designer.cs">
-      <DependentUpon>201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407291921595_AddedBaseModelWithId.cs" />
-    <Compile Include="Migrations\201407291921595_AddedBaseModelWithId.Designer.cs">
-      <DependentUpon>201407291921595_AddedBaseModelWithId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201407311018274_AddFlagToTicketIsBought.cs" />
-    <Compile Include="Migrations\201407311018274_AddFlagToTicketIsBought.Designer.cs">
-      <DependentUpon>201407311018274_AddFlagToTicketIsBought.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -392,56 +326,6 @@
       <Project>{eaba2ece-f482-4405-a3dd-5b8fd4bec1fd}</Project>
       <Name>MovieTickets.Presentation.ViewModels</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407230813456_Initial.resx">
-      <DependentUpon>201407230813456_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407240936325_ChangedFilmEntityAddedFlagForDelete.resx">
-      <DependentUpon>201407240936325_ChangedFilmEntityAddedFlagForDelete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407240945492_ChangedFilmEntity.resx">
-      <DependentUpon>201407240945492_ChangedFilmEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407250920142_ChangedOneToManyLinkBeetwenFilmsAndSeance.resx">
-      <DependentUpon>201407250920142_ChangedOneToManyLinkBeetwenFilmsAndSeance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.resx">
-      <DependentUpon>201407250925050_RestoreOneToManyLinkBeetwenFilmsAndSeance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407261048474_ChangedLinkWithIdentityTables.resx">
-      <DependentUpon>201407261048474_ChangedLinkWithIdentityTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407261057064_RestoredLinkWithIdentityTables.resx">
-      <DependentUpon>201407261057064_RestoredLinkWithIdentityTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407261210175_ChangedAppUserIdType.resx">
-      <DependentUpon>201407261210175_ChangedAppUserIdType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407261632131_ChangedDateTypeToDateTime2.resx">
-      <DependentUpon>201407261632131_ChangedDateTypeToDateTime2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407271321101_AddedPricesIncreasingCoef.resx">
-      <DependentUpon>201407271321101_AddedPricesIncreasingCoef.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407271357369_RemovedLinkFromTicketPriceToTicketCategory.resx">
-      <DependentUpon>201407271357369_RemovedLinkFromTicketPriceToTicketCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.resx">
-      <DependentUpon>201407271359374_RemovedLinkFromTicketPriceToTicketCategoryContinue.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407280434267_ChangedLinkBeetwenPriceAndSeance.resx">
-      <DependentUpon>201407280434267_ChangedLinkBeetwenPriceAndSeance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.resx">
-      <DependentUpon>201407280444493_ChangedLinkBeetwenPriceAndSeanceRemovedSeanceId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407291921595_AddedBaseModelWithId.resx">
-      <DependentUpon>201407291921595_AddedBaseModelWithId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201407311018274_AddFlagToTicketIsBought.resx">
-      <DependentUpon>201407311018274_AddFlagToTicketIsBought.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

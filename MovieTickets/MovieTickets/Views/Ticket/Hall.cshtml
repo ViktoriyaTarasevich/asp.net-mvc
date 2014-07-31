@@ -25,13 +25,11 @@
             type: "POST",
             data: {
                 data: getSelectedPlaceId(),
-                seanceId : @Model.SeanceId
+                seanceId: @Model.SeanceId
             },
-            success: function () {
+            success: function() {
                 window.location.href = '@(Html.ActionUri("Index", "Home"))';
             }
-            
-
         });
     }
 </script>

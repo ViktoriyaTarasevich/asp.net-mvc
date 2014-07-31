@@ -1,44 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using DataAccess.Context;
 using DataAccess.Repository;
 
 namespace DataAccess.UnitOfWork
 {
-    public class UnitOfWork<TContext>: IUnitOfWork<TContext> where TContext : DbContext, new()
+    public class UnitOfWork : IUnitOfWork
     {
-        private TContext _context;
-        private Dictionary<Type, object> _repositories;
+        private MovieTicketContext _context;
         private bool _disposed;
-
-        public TContext Context { get { return _context; } }
+        private Dictionary<Type, object> _repositories;
 
         public UnitOfWork()
         {
-            this._context = new TContext();
-            this._repositories = new Dictionary<Type, object>();
+            _context = new MovieTicketContext();
+            _repositories = new Dictionary<Type, object>();
         }
 
-        ~UnitOfWork()
+        public MovieTicketContext Context
         {
-            Dispose(false);
+            get { return _context; }
         }
 
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {
-            if (this._repositories.Keys.Contains(typeof (TEntity)))
+            if (_repositories.Keys.Contains(typeof (TEntity)))
             {
-                return this._repositories[typeof (TEntity)] as IRepository<TEntity>;
+                return _repositories[typeof (TEntity)] as IRepository<TEntity>;
             }
-            var repository = new Repository<TEntity>(this._context);
-            this._repositories.Add(typeof(TEntity), repository);
+            var repository = new Repository<TEntity>(_context);
+            _repositories.Add(typeof (TEntity), repository);
             return repository;
         }
 
         public void Save()
         {
-            this._context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose()
@@ -47,19 +45,24 @@ namespace DataAccess.UnitOfWork
             GC.SuppressFinalize(this);
         }
 
+        ~UnitOfWork()
+        {
+            Dispose(false);
+        }
+
         protected virtual void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
-                    if(this._context != null)
-                        this._context.Dispose();
-                    this._context = null;
-                    this._repositories = null;
+                    if (_context != null)
+                        _context.Dispose();
+                    _context = null;
+                    _repositories = null;
                 }
 
-                this._disposed = true;
+                _disposed = true;
             }
         }
     }

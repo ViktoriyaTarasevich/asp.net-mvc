@@ -1,10 +1,10 @@
 ﻿using System;
+using DataAccess.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using MovieTickets.App_Start;
-using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 using Owin;
 

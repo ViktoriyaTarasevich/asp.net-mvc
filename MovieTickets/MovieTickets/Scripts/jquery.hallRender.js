@@ -1,5 +1,5 @@
 ﻿'use strict';
-(function ($) {
+(function($) {
     jQuery.fn.hallRender = function(reservedSeats, options) {
         var element = this;
         options = $.extend({
@@ -8,7 +8,7 @@
             vacantSeatLogo: './../../Content/Images/Seats/vacantseat.jpg',
             reservedSeatLogo: './../../Content/Images/Seats/reservedseat.jpg',
             selectedSeatLogo: './../../Content/Images/Seats/selectedseat.jpg',
-            startPlaceId: 59,
+            startPlaceId: 1,
             setRowPlacesTitle: setRowTitle,
             setScreenForHall: setDefaultScreen,
             setDistanceBetweenRows: setDefaultDistanceBetweenRows
@@ -17,7 +17,7 @@
         var SELECTED_SEAT = 'selectedSeat';
         var VACANT_SEAT = 'vacantSeat';
         var RESERVED_SEAT = 'reservedSeat';
-        
+
         function setRowTitle(row) {
             if (row === 0 || row === 1) {
                 element.append('<span>' + (row + 1) + 'V</span>');
@@ -39,7 +39,7 @@
                 element.append('<br/>');
             }
         }
-        
+
         function isContainsInArray(placeId) {
             if (reservedSeats) {
                 for (var k = 0; k < reservedSeats.length; k++) {
@@ -54,9 +54,9 @@
         function createPlace(column, logo, className) {
             element.append('<a id = "' +
                 (tempId++) +
-                '" class = "place '+ className +'" title = "' +
+                '" class = "place ' + className + '" title = "' +
                 (column + 1) +
-                '"><img src = "' + logo + '" class = "'+className+'"/></a>');
+                '"><img src = "' + logo + '" class = "' + className + '"/></a>');
         }
 
         options.setScreenForHall();
@@ -74,19 +74,19 @@
             setDefaultDistanceBetweenRows();
         }
 
-        $(document.body).on('click', '.place', function () {
+        $(document.body).on('click', '.place', function() {
             var clickElement = $(this);
             if (clickElement.hasClass(SELECTED_SEAT)) {
                 clickElement.removeClass(SELECTED_SEAT);
-                clickElement.html('<img src = "' + options.vacantSeatLogo + '" class = "'+VACANT_SEAT+'"/>');
+                clickElement.html('<img src = "' + options.vacantSeatLogo + '" class = "' + VACANT_SEAT + '"/>');
                 return;
             }
             if (clickElement.hasClass(RESERVED_SEAT)) {
                 return;
             } else {
                 clickElement.addClass(SELECTED_SEAT);
-                clickElement.find('.'+VACANT_SEAT).remove();
-                clickElement.html('<img src = "'+ options.selectedSeatLogo +'" class = "'+SELECTED_SEAT+'"/>');
+                clickElement.find('.' + VACANT_SEAT).remove();
+                clickElement.html('<img src = "' + options.selectedSeatLogo + '" class = "' + SELECTED_SEAT + '"/>');
                 return;
             }
         });

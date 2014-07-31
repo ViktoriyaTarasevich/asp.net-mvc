@@ -37,7 +37,7 @@
         // A central reference to the root jQuery(document)
         rootjQuery,
         // Support: IE<10
-	// For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
+        // For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
         core_strundefined = typeof undefined,
         // Use the correct document accordingly with window argument (sandbox)
         location = window.location,
@@ -72,7 +72,7 @@
         // Make sure we trim BOM and NBSP (here's looking at you, Safari 5.0 and IE)
         rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
         // A simple way to check for HTML strings
-	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
+        // Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
         rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
         // Match a standalone tag
@@ -369,7 +369,7 @@
 
     jQuery.extend({
         // Unique for each copy of jQuery on the page
-	// Non-digits removed to match rinlinejQuery
+        // Non-digits removed to match rinlinejQuery
         expando: "jQuery" + (core_version + Math.random()).replace(/\D/g, ""),
 
         noConflict: function(deep) {
@@ -1062,19 +1062,19 @@
             booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
             // Regular expressions
 
-	// Whitespace characters http://www.w3.org/TR/css3-selectors/#whitespace
+            // Whitespace characters http://www.w3.org/TR/css3-selectors/#whitespace
             whitespace = "[\\x20\\t\\r\\n\\f]",
             // http://www.w3.org/TR/css3-syntax/#characters
             characterEncoding = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",
             // Loosely modeled on CSS identifier characters
-	// An unquoted value should be a CSS identifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
+            // An unquoted value should be a CSS identifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
 	// Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
             identifier = characterEncoding.replace("w", "w#"),
             // Acceptable operators http://www.w3.org/TR/selectors/#attribute-selectors
             attributes = "\\[" + whitespace + "*(" + characterEncoding + ")" + whitespace +
                 "*(?:([*^$|!~]?=)" + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + identifier + ")|)|)" + whitespace + "*\\]",
             // Prefer arguments quoted,
-	//   then not containing pseudos/brackets,
+            //   then not containing pseudos/brackets,
 	//   then attribute selectors/non-parenthetical expressions,
 	//   then anything else
 	// These preferences are here to reduce the number of selectors
@@ -1142,7 +1142,7 @@
                         push_native.apply(target, slice.call(els));
                     } :
                     // Support: IE<9
-		// Otherwise append directly
+                    // Otherwise append directly
                     function(target, els) {
                         var j = target.length,
                             i = 0;
@@ -1789,7 +1789,7 @@
                     // IE 9's matchesSelector returns false on disconnected nodes
                     if (ret || support.disconnectedMatch ||
                         // As well, disconnected nodes are said to be in a document
-					// fragment in IE 9
+                        // fragment in IE 9
                         elem.document && elem.document.nodeType !== 11) {
                         return ret;
                     }
@@ -3543,13 +3543,13 @@
         var ret, thisCache,
             internalKey = jQuery.expando,
             // We have to handle DOM nodes and JS objects differently because IE6-7
-		// can't GC object references properly across the DOM-JS boundary
+            // can't GC object references properly across the DOM-JS boundary
             isNode = elem.nodeType,
             // Only DOM nodes need the global jQuery cache; JS object data is
-		// attached directly to the object so GC can occur automatically
+            // attached directly to the object so GC can occur automatically
             cache = isNode ? jQuery.cache : elem,
             // Only defining an ID for JS objects if its cache already exists allows
-		// the code to shortcut on the same path as a DOM node with no cache
+            // the code to shortcut on the same path as a DOM node with no cache
             id = isNode ? elem[internalKey] : elem[internalKey] && internalKey;
 
         // Avoid doing any more work than we need to when trying to get data on an
@@ -3804,7 +3804,7 @@
                     jQuery.data(this, key, value);
                 }) :
                 // Gets one value
-			// Try to fetch any internally stored data first
+                // Try to fetch any internally stored data first
                 elem ? dataAttr(elem, key, jQuery.data(elem, key)) : null;
         },
 
@@ -5727,7 +5727,7 @@
             return !!winnow(
                 this,
                 // If this is a positional/relative selector, check membership in the returned set
-			// so $("p:first").is("p:last") won't return true for a doc with two "p".
+                // so $("p:first").is("p:last") won't return true for a doc with two "p".
                 typeof selector === "string" && rneedsContext.test(selector) ?
                     jQuery(selector) :
                     selector || [],
@@ -6761,7 +6761,7 @@
         ropacity = /opacity\s*=\s*([^)]*)/,
         rposition = /^(top|right|bottom|left)$/,
         // swappable if display is none or starts with table except "table", "table-cell", or "table-caption"
-	// see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+        // see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
         rdisplayswap = /^(none|table(?!-c[ea]).+)/,
         rmargin = /^margin/,
         rnumsplit = new RegExp("^(" + core_pnum + ")(.*)$", "i"),
@@ -6907,7 +6907,7 @@
 
     jQuery.extend({
         // Add in style property hooks for overriding the default
-	// behavior of getting and setting a style property
+        // behavior of getting and setting a style property
         cssHooks: {
             opacity: {
                 get: function(elem, computed) {
@@ -7718,7 +7718,7 @@
 
                 self.html(selector ?
                     // If a selector was specified, locate the right elements in a dummy div
-				// Exclude scripts to avoid IE 'Permission Denied' errors
+                    // Exclude scripts to avoid IE 'Permission Denied' errors
                     jQuery("<div>").append(jQuery.parseHTML(responseText)).find(selector) :
                     // Otherwise use the full result
                     responseText);
@@ -8900,7 +8900,7 @@
                 stop: function(gotoEnd) {
                     var index = 0,
                         // if we are going to the end, we want to run all the tweens
-					// otherwise we skip this part
+                        // otherwise we skip this part
                         length = gotoEnd ? animation.tweens.length : 0;
                     if (stopped) {
                         return this;

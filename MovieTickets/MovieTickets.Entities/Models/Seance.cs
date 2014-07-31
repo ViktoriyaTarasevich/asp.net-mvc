@@ -11,16 +11,14 @@ namespace MovieTickets.Entities.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
+
         [DataType(DataType.Time)]
         [Column(TypeName = "datetime2")]
         public DateTime Time { get; set; }
+
         public int FilmId { get; set; }
 
         public int TicketPriceId { get; set; }
         public virtual ICollection<Ticket> Tickets { get; set; }
-
-        
-
-        
     }
 }

@@ -7,7 +7,7 @@
 }
 
 
-<h2>@ViewBag.Title.</h2>
+<h2>@User.Identity.GetUserName()</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="row">
@@ -16,7 +16,8 @@
         @if (Model != null)
         {
             @Html.Label(Model.SurName)
-            @Html.Label(Model.Email)
+            <br/>
+            @Model.Email
         }
         @using (Html.BeginForm("Manage", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
         {

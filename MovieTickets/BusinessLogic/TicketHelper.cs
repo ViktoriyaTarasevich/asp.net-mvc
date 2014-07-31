@@ -12,21 +12,24 @@ namespace BusinessLogic
     {
         public static List<SelectListItem> SetSeancesToSelectedListItems(IEnumerable<Seance> seances, int filmId)
         {
-            var result  = (from seance in seances
-                where seance.FilmId == filmId
-                select new SelectListItem
-                {
-                    Text = (seance.Date.ToShortDateString() + " | " + seance.Time.ToShortTimeString()), Value = seance.Id.ToString(CultureInfo.InvariantCulture)
-                }).ToList();
+            List<SelectListItem> result = (from seance in seances
+                                           where seance.FilmId == filmId
+                                           select new SelectListItem
+                                               {
+                                                   Text =
+                                                       (seance.Date.ToShortDateString() + " | " +
+                                                        seance.Time.ToShortTimeString()),
+                                                   Value = seance.Id.ToString(CultureInfo.InvariantCulture)
+                                               }).ToList();
             return result;
         }
 
         public static List<int> GetReservedPlacesForSeance(IEnumerable<Ticket> tickets, int seanceId)
         {
             var list = new List<Ticket>(tickets);
-            var result = (from ticket in list
-                where ticket.SeanceId == seanceId && ticket.IsBought == true
-                select ticket.PlaceId).ToList();
+            List<int> result = (from ticket in list
+                                where ticket.SeanceId == seanceId && ticket.IsBought
+                                select ticket.PlaceId).ToList();
             return result;
         }
 
@@ -35,8 +38,11 @@ namespace BusinessLogic
             return ticketsPrice.Any(x => x.Price == ticketPrice);
         }
 
-        public static List<TicketViewModels> GetInformationForBascket(IRepository<TicketPrice> ticketsPrice, IRepository<TicketCategory> ticketCategories,
-            List<Ticket> tickets, IRepository<Film> films, IRepository<Seance> seances, IRepository<Place> places)
+        public static List<TicketViewModels> GetInformationForBascket(IRepository<TicketPrice> ticketsPrice,
+                                                                      IRepository<TicketCategory> ticketCategories,
+                                                                      List<Ticket> tickets, IRepository<Film> films,
+                                                                      IRepository<Seance> seances,
+                                                                      IRepository<Place> places)
         {
             List<TicketViewModels> ticketsModel = (from ticket in tickets
                                                    where ticket.IsBought == false
@@ -47,13 +53,13 @@ namespace BusinessLogic
                                                    let category =
                                                        ticketCategories.GetById(place.TicketCategoryId)
                                                    select new TicketViewModels
-                                                   {
-                                                       Id = ticket.Id,
-                                                       Row = place.Row,
-                                                       Column = place.Col,
-                                                       Film = film.Title,
-                                                       Price = price.Price * category.PriceCoef
-                                                   }).ToList();
+                                                       {
+                                                           Id = ticket.Id,
+                                                           Row = place.Row,
+                                                           Column = place.Col,
+                                                           Film = film.Title,
+                                                           Price = price.Price*category.PriceCoef
+                                                       }).ToList();
             return ticketsModel;
         }
     }

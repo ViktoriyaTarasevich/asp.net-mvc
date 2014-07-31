@@ -32,9 +32,10 @@
 }
 
 .textarea {
-    min-width: 500px;
     min-height: 300px;
+    min-width: 500px;
 }
+
 .place { margin: 5px; }
 
 .vacantSeat, .reservedSeat, .selectedSeat { margin-bottom: 5px; }

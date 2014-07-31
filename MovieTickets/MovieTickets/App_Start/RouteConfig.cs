@@ -18,7 +18,7 @@ namespace MovieTickets
             routes.MapRoute(
                 "Delete",
                 "Accpunt/Delete/{id}",
-                new { controller = "Ticket", action = "Delete", id = UrlParameter.Optional }
+                new {controller = "Ticket", action = "Delete", id = UrlParameter.Optional}
                 );
 
             routes.MapRoute(

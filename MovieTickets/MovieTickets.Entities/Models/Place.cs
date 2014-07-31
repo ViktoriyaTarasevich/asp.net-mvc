@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MovieTickets.Entities.Models
+﻿namespace MovieTickets.Entities.Models
 {
     public class Place : EntityBase
     {

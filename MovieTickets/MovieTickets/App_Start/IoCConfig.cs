@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using DataAccess.UnitOfWork;
-using MovieTickets.Context;
 using Ninject;
 
 namespace MovieTickets.App_Start
@@ -24,7 +23,7 @@ namespace MovieTickets.App_Start
 
         private void AddBindings()
         {
-            _ninjectKernel.Bind<IUnitOfWork<MovieTicketContext>>().To<UnitOfWork<MovieTicketContext>>();
+            _ninjectKernel.Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }
 }

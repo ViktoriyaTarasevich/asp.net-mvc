@@ -36,17 +36,15 @@
                         </li>
                     </ul>
                     
-                    @using (Html.BeginForm("FullTextSearch", "Home", FormMethod.Get, new { @class = "navbar-form navbar-right", @role = "search" }))
+                    @using (Html.BeginForm("FullTextSearch", "Home", FormMethod.Get, new {@class = "navbar-form navbar-right", @role = "search"}))
                     {
-
                         @Html.TextBox("SearchString")
 
                         <button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-search"></span></button>
-   
                     }
-        @Html.Partial("_LoginRegisterPartial")
+                    @Html.Partial("_LoginRegisterPartial")
 
-    </div>
+                </div>
             </div>
         </div>
         <div class="container body-content">

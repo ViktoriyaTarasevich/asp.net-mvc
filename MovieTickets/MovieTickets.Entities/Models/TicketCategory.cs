@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTickets.Entities.Models
 {
@@ -8,6 +7,7 @@ namespace MovieTickets.Entities.Models
     {
         [Required]
         public string Title { get; set; }
+
         public int PriceCoef { get; set; }
         public virtual ICollection<Place> Places { get; set; }
     }

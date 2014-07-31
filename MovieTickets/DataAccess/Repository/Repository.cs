@@ -12,19 +12,20 @@ namespace DataAccess.Repository
 
         public Repository(DbContext context)
         {
-            this._context = context;
-            this._dbSet = this._context.Set<TEntity>();
+            _context = context;
+            _dbSet = _context.Set<TEntity>();
         }
+
         public IEnumerable<TEntity> GetAll()
         {
-            return this._dbSet.AsQueryable();
+            return _dbSet.AsQueryable();
         }
 
         public TEntity GetById<T>(T id)
         {
             if (id != null)
             {
-                return this._dbSet.Find(id);
+                return _dbSet.Find(id);
             }
             throw new NoNullAllowedException("entity");
         }
@@ -33,20 +34,19 @@ namespace DataAccess.Repository
         {
             if (entity != null)
             {
-                this._dbSet.Add(entity);
+                _dbSet.Add(entity);
             }
         }
 
         public void Update(TEntity entity)
         {
-            
         }
 
         public void Delete(TEntity entity)
         {
             if (entity != null)
             {
-                this._context.Set<TEntity>().Remove(entity);
+                _context.Set<TEntity>().Remove(entity);
             }
         }
     }

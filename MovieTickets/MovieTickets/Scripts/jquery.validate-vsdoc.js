@@ -261,7 +261,7 @@
         return source;
     };
 
-    $.extend($.validator, {	
+    $.extend($.validator, {
         defaults: {
             messages: {},
             groups: {},
@@ -344,7 +344,7 @@
 
         autoCreateRanges: false,
 
-        prototype: {		
+        prototype: {
             init: function() {
                 this.labelContainer = $(this.settings.errorLabelContainer);
                 this.errorContext = this.labelContainer.length && this.labelContainer || $(this.currentForm);
@@ -838,7 +838,7 @@
                     valid: true,
                     message: this.defaultMessage(element, "remote")
                 });
-            }		
+            }
         },
 
         classRuleSettings: {
@@ -1197,8 +1197,8 @@
                     $(element).valid();
                 });
                 return value == target.val();
-            }		
-        }	
+            }
+        }
     });
 
 // deprecated, use $.validator.format instead

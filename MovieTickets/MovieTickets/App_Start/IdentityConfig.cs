@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DataAccess.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.DataProtection;
-using MovieTickets.Context;
 using MovieTickets.Entities.Models;
-using MovieTickets.Migrations;
 
 namespace MovieTickets.App_Start
 {
@@ -63,7 +58,7 @@ namespace MovieTickets.App_Start
         {
             var rm = new RoleManager<IdentityRole>(
                 new RoleStore<IdentityRole>(new MovieTicketContext()));
-            var idResult = rm.Create(new IdentityRole(name));
+            IdentityResult idResult = rm.Create(new IdentityRole(name));
             return idResult.Succeeded;
         }
 
@@ -71,10 +66,9 @@ namespace MovieTickets.App_Start
         {
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(new MovieTicketContext()));
-            var idResult = um.AddToRole(userId, roleName);
+            IdentityResult idResult = um.AddToRole(userId, roleName);
             return idResult.Succeeded;
         }
-  
     }
 
     public class EmailService : IIdentityMessageService
@@ -92,8 +86,4 @@ namespace MovieTickets.App_Start
             return Task.FromResult(0);
         }
     }
-
-    
-
-    
 }

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BusinessLogic;
+using DataAccess.Repository;
 using DataAccess.UnitOfWork;
-using MovieTickets.Context;
 using MovieTickets.Entities.Models;
 using MovieTickets.Presentation.ViewModels;
 
@@ -12,20 +12,18 @@ namespace MovieTickets.Controllers
 {
     public class FilmController : Controller
     {
-        
-        private readonly IUnitOfWork<MovieTicketContext> _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FilmController(IUnitOfWork<MovieTicketContext> uof)
+        public FilmController(IUnitOfWork uof)
         {
             _unitOfWork = uof;
-            
         }
 
         //
         // GET: /Admin/
         public ActionResult FilmControl()
         {
-            var repository = _unitOfWork.GetRepository<Film>();
+            IRepository<Film> repository = _unitOfWork.GetRepository<Film>();
             IEnumerable<Film> model = repository.GetAll();
             return View(model);
         }
@@ -33,7 +31,7 @@ namespace MovieTickets.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            var repository = _unitOfWork.GetRepository<Film>();
+            IRepository<Film> repository = _unitOfWork.GetRepository<Film>();
             repository.Delete(repository.GetById(id));
             _unitOfWork.Save();
             return RedirectToAction("FilmControl");
@@ -47,13 +45,13 @@ namespace MovieTickets.Controllers
         [HttpPost]
         public ActionResult Create(Film model, HttpPostedFileBase file)
         {
-            if (model.Title != null && model.Description !=null && file != null)
+            if (model.Title != null && model.Description != null && file != null)
             {
-                var repository = _unitOfWork.GetRepository<Film>();
+                IRepository<Film> repository = _unitOfWork.GetRepository<Film>();
                 model.Image = file.FileName;
                 repository.Insert(model);
                 _unitOfWork.Save();
-                return RedirectToAction("NewSeance", new { id = model.Id });
+                return RedirectToAction("NewSeance", new {id = model.Id});
             }
             return View();
         }
@@ -69,7 +67,7 @@ namespace MovieTickets.Controllers
         {
             if (ModelState.IsValid)
             {
-                var priceRepository = _unitOfWork.GetRepository<TicketPrice>();
+                IRepository<TicketPrice> priceRepository = _unitOfWork.GetRepository<TicketPrice>();
                 TicketPrice price;
                 if (!TicketHelper.IsTicketPriceIdInDataBase(priceRepository.GetAll(), model.Price))
                 {
@@ -81,7 +79,7 @@ namespace MovieTickets.Controllers
                 {
                     price = priceRepository.GetAll().First(x => x.Price == model.Price);
                 }
-                var senceRepository = _unitOfWork.GetRepository<Seance>();
+                IRepository<Seance> senceRepository = _unitOfWork.GetRepository<Seance>();
                 var seance = new Seance {FilmId = id, Time = model.Time, Date = model.Date, TicketPriceId = price.Id};
                 senceRepository.Insert(seance);
                 _unitOfWork.Save();
