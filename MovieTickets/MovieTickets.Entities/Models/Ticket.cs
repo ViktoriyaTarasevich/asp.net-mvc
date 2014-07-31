@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTickets.Entities.Models
@@ -11,7 +10,6 @@ namespace MovieTickets.Entities.Models
         public int SeanceId { get; set; }
         public int PlaceId { get; set; }
         public string ApplicationUserId { get; set; }
-        
-
+        public bool IsBought { get; set; }
     }
 }

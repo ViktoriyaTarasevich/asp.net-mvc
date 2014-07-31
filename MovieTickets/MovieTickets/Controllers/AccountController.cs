@@ -21,9 +21,10 @@ namespace MovieTickets.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-
-        public AccountController( )
+        private IUnitOfWork<MovieTicketContext> _unitOfWork; 
+        public AccountController(IUnitOfWork<MovieTicketContext> uof)
         {
+            _unitOfWork = uof;
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -95,7 +96,7 @@ namespace MovieTickets.Controllers
                         SurName = model.SurName
                     };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new UnitOfWork<MovieTicketContext>().Context));
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_unitOfWork.Context));
                 if (!roleManager.RoleExists("user"))
                 {
                     roleManager.Create(new IdentityRole("user"));
@@ -114,8 +115,8 @@ namespace MovieTickets.Controllers
 
         public ActionResult LogOff()
         {
-            var uow = new UnitOfWork<MovieTicketContext>();
-            IRepository<IpStory> repository = uow.GetRepository<IpStory>();
+            
+            IRepository<IpStory> repository = _unitOfWork.GetRepository<IpStory>();
             if (User.Identity.GetUserId() != null)
             {
                 repository.Insert(new IpStory
@@ -126,7 +127,7 @@ namespace MovieTickets.Controllers
                     });
             }
 
-            uow.Save();
+            _unitOfWork.Save();
             AuthenticationManager.SignOut();
 
             return RedirectToAction("Index", "Home");
@@ -185,15 +186,16 @@ namespace MovieTickets.Controllers
         {
             if (id == User.Identity.GetUserId())
             {
-                var uow = new UnitOfWork<MovieTicketContext>();
-                IRepository<Ticket> repository = uow.GetRepository<Ticket>();
+
+                IRepository<Ticket> repository = _unitOfWork.GetRepository<Ticket>();
                 List<Ticket> tickets = repository.GetAll().Where(ticket => ticket.ApplicationUserId == id).ToList();
-                IRepository<Place> placesRepository = uow.GetRepository<Place>();
-                IRepository<Seance> seanceRepository = uow.GetRepository<Seance>();
-                IRepository<Film> filmRepository = uow.GetRepository<Film>();
-                IRepository<TicketPrice> priceRepository = uow.GetRepository<TicketPrice>();
-                IRepository<TicketCategory> ticketCategoryRepository = uow.GetRepository<TicketCategory>();
+                IRepository<Place> placesRepository = _unitOfWork.GetRepository<Place>();
+                IRepository<Seance> seanceRepository = _unitOfWork.GetRepository<Seance>();
+                IRepository<Film> filmRepository = _unitOfWork.GetRepository<Film>();
+                IRepository<TicketPrice> priceRepository = _unitOfWork.GetRepository<TicketPrice>();
+                IRepository<TicketCategory> ticketCategoryRepository = _unitOfWork.GetRepository<TicketCategory>();
                 List<TicketViewModels> ticketsModel = (from ticket in tickets
+                                                       where ticket.IsBought == false
                                                        let place = placesRepository.GetById(ticket.PlaceId)
                                                        let seance = seanceRepository.GetById(ticket.SeanceId)
                                                        let film = filmRepository.GetById(seance.FilmId)

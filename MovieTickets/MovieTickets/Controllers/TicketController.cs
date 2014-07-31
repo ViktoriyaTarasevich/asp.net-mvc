@@ -62,7 +62,8 @@ namespace MovieTickets.Controllers
                         ApplicationUserId = User.Identity.GetUserId(),
                         DateTimeBuy = DateTime.Now,
                         PlaceId = Int32.Parse(place),
-                        SeanceId = seanceId
+                        SeanceId = seanceId,
+                        IsBought = false
                     });
                 }
                 _unitOfWork.Save();

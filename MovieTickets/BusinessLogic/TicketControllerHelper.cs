@@ -23,7 +23,7 @@ namespace BusinessLogic
         {
             var list = new List<Ticket>(tickets);
             var result = (from ticket in list
-                where ticket.SeanceId == seanceId
+                where ticket.SeanceId == seanceId && ticket.IsBought == true
                 select ticket.PlaceId).ToList();
             return result;
         }

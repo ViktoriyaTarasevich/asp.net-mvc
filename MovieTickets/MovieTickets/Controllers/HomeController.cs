@@ -6,16 +6,19 @@ using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.Context;
 using MovieTickets.Entities.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MovieTickets.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IRepository<Film> _repository;
-
+        private IUnitOfWork<MovieTicketContext> _unitOfWork; 
         public HomeController(IUnitOfWork<MovieTicketContext> uof)
         {
+            _unitOfWork = uof;
             _repository = uof.GetRepository<Film>();
+            
         }
 
         //
@@ -50,6 +53,13 @@ namespace MovieTickets.Controllers
 
         public ActionResult BuyResult()
         {
+            var repository = _unitOfWork.GetRepository<Ticket>();
+            var tickets = repository.GetAll();
+            foreach (var ticket in tickets.Where(ticket => ticket.ApplicationUserId == User.Identity.GetUserId()))
+            {
+                ticket.IsBought = true;
+            }
+            _unitOfWork.Save();
             ViewBag.Action = "Потрачено.";
             return View();
         }

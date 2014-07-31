@@ -8,5 +8,6 @@ namespace DataAccess.UnitOfWork
     {
         IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
         void Save();
+        TContext Context { get;  }
     }
 }
