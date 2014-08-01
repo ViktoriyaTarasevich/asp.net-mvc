@@ -5,6 +5,12 @@ using System.Web.Mvc;
 using DataAccess.Repository;
 using MovieTickets.Entities.Models;
 using MovieTickets.Presentation.ViewModels;
+using Film = BusinessLogic.Domain.Film;
+using Place = BusinessLogic.Domain.Place;
+using Seance = BusinessLogic.Domain.Seance;
+using Ticket = BusinessLogic.Domain.Ticket;
+using TicketCategory = BusinessLogic.Domain.TicketCategory;
+using TicketPrice = BusinessLogic.Domain.TicketPrice;
 
 namespace BusinessLogic
 {
