@@ -5,7 +5,7 @@ using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNet.Identity;
 using MovieTickets.Entities.Models;
-using MovieTickets.Presentation.ViewModels;
+using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
 {

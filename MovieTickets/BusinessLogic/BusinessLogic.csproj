@@ -57,10 +57,6 @@
       <Project>{bc22cac8-92f8-4dfb-b27c-1533641453f3}</Project>
       <Name>MovieTickets.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MovieTickets.Presentation.ViewModels\MovieTickets.Presentation.ViewModels.csproj">
-      <Project>{eaba2ece-f482-4405-a3dd-5b8fd4bec1fd}</Project>
-      <Name>MovieTickets.Presentation.ViewModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

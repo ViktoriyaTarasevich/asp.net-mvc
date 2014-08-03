@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BusinessLogic.Domain;
-using MovieTickets.Presentation.ViewModels;
+using MovieTickets.Domain;
+using MovieTickets.ViewModels;
 
 namespace MovieTickets.App_Start
 {
@@ -8,17 +8,12 @@ namespace MovieTickets.App_Start
     {
         public AutoMapperConfig()
         {
-            Mapper.CreateMap<ApplicationUser, RegisterViewModel>()
-                .AfterMap((user, viewmodel) =>
-                    {
-                        
-                    }
-                );
+            Mapper.CreateMap<ApplicationUser, RegisterViewModel>();
             Mapper.CreateMap<ApplicationUser, LogInViewModel>();
             Mapper.CreateMap<ApplicationUser, ManageUserViewModel>();
             Mapper.CreateMap<Ticket, TicketViewModels>();
             Mapper.CreateMap<Seance, SeanceViewModel>();
-            Mapper.CreateMap<Seance,HallViewModel>();
+            Mapper.CreateMap<Seance, HallViewModel>();
         }
     }
 }

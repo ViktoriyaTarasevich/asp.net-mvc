@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using MovieTickets.Entities.Models;
 
-namespace MovieTickets.Presentation.ViewModels
+namespace MovieTickets.ViewModels
 {
     public class ManageUserViewModel
     {

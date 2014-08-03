@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace MovieTickets.Presentation.ViewModels
+namespace MovieTickets.ViewModels
 {
     public class TicketViewModels
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using DataAccess.Repository;
 using MovieTickets.Entities.Models;
-using MovieTickets.Presentation.ViewModels;
+
 
 namespace BusinessLogic
 {
@@ -38,29 +38,6 @@ namespace BusinessLogic
             return ticketsPrice.Any(x => x.Price == ticketPrice);
         }
 
-        public static List<TicketViewModels> GetInformationForBascket(IRepository<TicketPrice> ticketsPrice,
-                                                                      IRepository<TicketCategory> ticketCategories,
-                                                                      List<Ticket> tickets, IRepository<Film> films,
-                                                                      IRepository<Seance> seances,
-                                                                      IRepository<Place> places)
-        {
-            List<TicketViewModels> ticketsModel = (from ticket in tickets
-                                                   where ticket.IsBought == false
-                                                   let place = places.GetById(ticket.PlaceId)
-                                                   let seance = seances.GetById(ticket.SeanceId)
-                                                   let film = films.GetById(seance.FilmId)
-                                                   let price = ticketsPrice.GetById(seance.TicketPriceId)
-                                                   let category =
-                                                       ticketCategories.GetById(place.TicketCategoryId)
-                                                   select new TicketViewModels
-                                                       {
-                                                           Id = ticket.Id,
-                                                           Row = place.Row,
-                                                           Column = place.Col,
-                                                           Film = film.Title,
-                                                           Price = price.Price*category.PriceCoef
-                                                       }).ToList();
-            return ticketsModel;
-        }
+        
     }
 }

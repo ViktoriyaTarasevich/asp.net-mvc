@@ -6,7 +6,7 @@ using BusinessLogic;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.Entities.Models;
-using MovieTickets.Presentation.ViewModels;
+using MovieTickets.ViewModels;
 
 namespace MovieTickets.Controllers
 {

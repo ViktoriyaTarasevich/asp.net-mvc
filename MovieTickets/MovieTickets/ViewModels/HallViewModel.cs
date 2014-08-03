@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MovieTickets.Presentation.ViewModels
+namespace MovieTickets.ViewModels
 {
     public class HallViewModel
     {

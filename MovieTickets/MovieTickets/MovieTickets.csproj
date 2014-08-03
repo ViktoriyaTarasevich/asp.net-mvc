@@ -260,6 +260,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\IoCConfig.cs" />
@@ -275,6 +276,12 @@
     <Compile Include="HtmlHelpers\ActionHelper.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HallViewModel.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
+    <Compile Include="ViewModels\ManageUserViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\SeanceViewModel.cs" />
+    <Compile Include="ViewModels\TicketViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -325,13 +332,13 @@
       <Project>{9eba92cf-eb54-4a1c-aef1-89a0d39e4295}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MovieTickets.Domain\MovieTickets.Domain.csproj">
+      <Project>{a21b5ccb-8426-4dc2-bfe1-106aa132695b}</Project>
+      <Name>MovieTickets.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MovieTickets.Entities\MovieTickets.Entities.csproj">
       <Project>{bc22cac8-92f8-4dfb-b27c-1533641453f3}</Project>
       <Name>MovieTickets.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MovieTickets.Presentation.ViewModels\MovieTickets.Presentation.ViewModels.csproj">
-      <Project>{eaba2ece-f482-4405-a3dd-5b8fd4bec1fd}</Project>
-      <Name>MovieTickets.Presentation.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
