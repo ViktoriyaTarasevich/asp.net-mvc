@@ -37,7 +37,7 @@
                         </li>
                     </ul>
                     
-                    @using (Html.BeginForm("FullTextSearch", "Home", FormMethod.Get, new {@class = "navbar-form navbar-right", @role = "search"}))
+                    @using (Html.BeginForm("FullTextSearch", "Home", FormMethod.Get, new { @class = "input-medium search-query navbar-form navbar-right", @role = "search" }))
                     {
                         @Html.TextBox("SearchString")
 

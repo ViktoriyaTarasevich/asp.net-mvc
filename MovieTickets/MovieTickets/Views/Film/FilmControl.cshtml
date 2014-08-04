@@ -6,23 +6,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>NewFilm</h2>
-
-<p>
-    <a class="btn btn-info" href=@Url.Action("Create", "Film")>
-        <i class="fa fa-film"></i> Добавить фильм
-    </a>
-</p>
+<div class="title-new-films">
+    <p>
+        <a class="btn btn-info" href=@Url.Action("Create", "Film")>
+            <i class="fa fa-film"></i> Добавить фильм
+        </a>
+    </p>
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Название
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            Постер
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Описание
         </th>
         <th></th>
         <th></th>
