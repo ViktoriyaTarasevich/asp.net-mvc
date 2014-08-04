@@ -40,11 +40,13 @@ namespace MovieTickets.Controllers
         [HttpGet]
         public ActionResult Hall(int idSeance)
         {
-            IRepository<Ticket> repository = _unitOfWork.GetRepository<Ticket>();
+            var ticketRepository = _unitOfWork.GetRepository<Ticket>();
+            var seance = _unitOfWork.GetRepository<Seance>().GetById(idSeance);
             var model = new HallViewModel
                 {
                     SeanceId = idSeance,
-                    PlacesId = TicketHelper.GetReservedPlacesForSeance(repository.GetAll(), idSeance)
+                    PlacesId = TicketHelper.GetReservedPlacesForSeance(ticketRepository.GetAll(), idSeance),
+                    Price = TicketHelper.GetPriceForSeance(seance,_unitOfWork.GetRepository<TicketPrice>().GetAll())
                 };
             return View(model);
         }

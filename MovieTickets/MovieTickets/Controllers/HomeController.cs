@@ -38,6 +38,7 @@ namespace MovieTickets.Controllers
         public ActionResult Film(int id)
         {
             var model = new List<Film> {_repository.GetById(id)};
+            if (model[0] == null) return RedirectToAction("Index", "Home");
             return View(model);
         }
 

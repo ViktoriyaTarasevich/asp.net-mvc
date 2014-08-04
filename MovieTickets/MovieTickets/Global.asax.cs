@@ -14,6 +14,7 @@ namespace MovieTickets
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            AutoMapperConfig.CreateMapping();
         }
     }
 }

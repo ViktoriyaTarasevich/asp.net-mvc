@@ -38,6 +38,9 @@ namespace BusinessLogic
             return ticketsPrice.Any(x => x.Price == ticketPrice);
         }
 
-        
+        public static int GetPriceForSeance(Seance seance ,IEnumerable<TicketPrice> ticketsPrice)
+        {
+            return ticketsPrice.SingleOrDefault(x => x.Id == seance.TicketPriceId).Price;
+        }
     }
 }

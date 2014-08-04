@@ -2,11 +2,14 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using BusinessLogic;
 using DataAccess.Repository;
 using DataAccess.UnitOfWork;
 using MovieTickets.Entities.Models;
 using MovieTickets.ViewModels;
+
+
 
 namespace MovieTickets.Controllers
 {
@@ -103,10 +106,16 @@ namespace MovieTickets.Controllers
                     price = priceRepository.GetAll().First(x => x.Price == model.Price);
                 }
                 IRepository<Seance> senceRepository = _unitOfWork.GetRepository<Seance>();
-                var seance = new Seance {FilmId = id, Time = model.Time, Date = model.Date, TicketPriceId = price.Id};
+
+                var seance =  new Seance
+                    {
+                        FilmId = id, Time = model.Time, Date = model.Date, TicketPriceId = price.Id
+                    };
+                
                 senceRepository.Insert(seance);
                 _unitOfWork.Save();
-                return View();
+                var seanceViewModel = Mapper.Map<SeanceViewModel>(seance);
+                return View(seanceViewModel);
             }
             return View();
         }

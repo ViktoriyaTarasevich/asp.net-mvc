@@ -11,6 +11,8 @@ namespace MovieTickets.ViewModels
         [HiddenInput(DisplayValue = false)]
         public List<int> PlacesId { get; set; }
 
+        public int Price { get; set; }
+
         public List<SelectListItem> Seances { get; set; }
     }
 }

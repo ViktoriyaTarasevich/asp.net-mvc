@@ -192,7 +192,9 @@ namespace MovieTickets.Controllers
                         Row = place.Row,
                         Column = place.Col,
                         Film = film.Title,
-                        Price = price.Price * category.PriceCoef
+                        Price = price.Price * category.PriceCoef,
+                        SeanceDate = seance.Date,
+                        SeanceTime = seance.Time
                     }).ToList();
                 return View(ticketsModel);
             }

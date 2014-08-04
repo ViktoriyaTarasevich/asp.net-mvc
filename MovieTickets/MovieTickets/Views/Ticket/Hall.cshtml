@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using Microsoft.AspNet.Identity
 @using MovieTickets.HtmlHelpers
 @model MovieTickets.ViewModels.HallViewModel
 
@@ -21,21 +22,24 @@
             data: {
                 data: getSelectedPlaceId(),
                 seanceId: @Model.SeanceId
-                },
+            },
             success: function() {
                 window.location.href = '@(Html.ActionUri("Index", "Home"))';
             }
         });
     }
 </script>
+
+ 
 <div class="container">
     <div class="hall">
-
     </div>
     <div class="form-hall">
         <input class="btn btn-success"  type="submit" onclick=" getData() " value="Добавить в корзину" />
+        <a class="btn btn-success" href=@Url.Action("Backet", "Account", new {id = @User.Identity.GetUserId()})>Просмотреть выбранные билеты</a>
     </div>
-    
+    <hr/>
+    @String.Format("Цена Vip = " + Model.Price*2+  "\r\nЦена Обычного места = "+Model.Price+"\r\nЦена грузового места = "+ Model.Price*3)
 </div>
 
 

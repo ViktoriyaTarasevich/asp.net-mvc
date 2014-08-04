@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using MovieTickets.Domain;
 using MovieTickets.ViewModels;
+using MovieTickets.Entities.Models;
+using Seance = MovieTickets.Entities.Models.Seance;
+using Ticket = MovieTickets.Domain.Ticket;
+
 
 namespace MovieTickets.App_Start
 {
@@ -8,12 +12,14 @@ namespace MovieTickets.App_Start
     {
         public AutoMapperConfig()
         {
-            Mapper.CreateMap<ApplicationUser, RegisterViewModel>();
-            Mapper.CreateMap<ApplicationUser, LogInViewModel>();
-            Mapper.CreateMap<ApplicationUser, ManageUserViewModel>();
+            
+        }
+
+        public static void CreateMapping()
+        {
             Mapper.CreateMap<Ticket, TicketViewModels>();
             Mapper.CreateMap<Seance, SeanceViewModel>();
-            Mapper.CreateMap<Seance, HallViewModel>();
+            Mapper.CreateMap<MovieTickets.Domain.Seance, MovieTickets.Entities.Models.Seance>();
         }
     }
 }

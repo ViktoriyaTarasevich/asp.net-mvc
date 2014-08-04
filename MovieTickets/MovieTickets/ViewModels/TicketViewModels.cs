@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace MovieTickets.ViewModels
@@ -20,5 +21,11 @@ namespace MovieTickets.ViewModels
 
         [Required]
         public int Price { get; set; }
+
+        [Required]
+        public DateTime SeanceDate { get; set; }
+
+        [Required]
+        public DateTime SeanceTime { get; set; }
     }
 }

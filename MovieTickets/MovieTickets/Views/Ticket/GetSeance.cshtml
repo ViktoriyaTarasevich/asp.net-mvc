@@ -18,19 +18,17 @@
             @Html.ValidationSummary(true, "", new {@class = "text-danger"})
             <div class="form-group">
            
-                <div class="col-md-10">
-                    @if (Model.Seances != null)
-                    {
-                        @Html.DropDownListFor(model => model.SeanceId, Model.Seances)
-                    }
-                </div>
+                @if (Model.Seances != null)
+                {
+                    @Html.DropDownListFor(model => model.SeanceId, Model.Seances, new { htmlAttributes = new { @class = "dropdown-menu" } })
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Выбрать место" class="btn btn-success" />
+                        
+                    </div>
+                }
             </div>
 
-            <div class="form-group right">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Выбрать место" class="btn btn-success" />
-                </div>
-            </div>
+            
         </div>
     }
 }
