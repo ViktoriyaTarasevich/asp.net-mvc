@@ -36,7 +36,10 @@
     margin-left: 25%;
     margin-top: 100px;
 }
-
+.form-hall {
+    padding-top: 50px;
+    padding-left: 360px;
+}
 .textarea {
     min-height: 300px;
     min-width: 500px;

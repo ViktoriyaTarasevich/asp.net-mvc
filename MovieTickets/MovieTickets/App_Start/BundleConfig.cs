@@ -27,6 +27,9 @@ namespace MovieTickets.App_Start
                 "~/Scripts/places-organization.js",
                 "~/Scripts/jquery.hallRender.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrap-filestyle").Include(
+                "~/Scripts/bootstrap-filestyle.js"));
+
             bundles.Add(new StyleBundle("~/Content/site").Include(
                 "~/Content/Site.css"));
 

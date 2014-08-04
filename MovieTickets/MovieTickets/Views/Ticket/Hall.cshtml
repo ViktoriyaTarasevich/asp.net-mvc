@@ -9,11 +9,6 @@
 
 @Scripts.Render("~/Scripts/custom-place-organization")
 
-<div class="container">
-    <div class="hall">
-
-    </div>
-</div>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.hall').hallRender(@Html.Raw(Json.Encode(Model.PlacesId)));
@@ -26,12 +21,21 @@
             data: {
                 data: getSelectedPlaceId(),
                 seanceId: @Model.SeanceId
-            },
+                },
             success: function() {
                 window.location.href = '@(Html.ActionUri("Index", "Home"))';
             }
         });
     }
 </script>
+<div class="container">
+    <div class="hall">
 
-<input class="btn btn-success"  type="submit" onclick=" getData() " value="Добавить в корзину" />
+    </div>
+    <div class="form-hall">
+        <input class="btn btn-success"  type="submit" onclick=" getData() " value="Добавить в корзину" />
+    </div>
+    
+</div>
+
+

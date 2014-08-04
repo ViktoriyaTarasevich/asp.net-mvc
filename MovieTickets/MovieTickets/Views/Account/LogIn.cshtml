@@ -6,20 +6,20 @@
 }
 
 
-
+<h2>Войти</h2>
 @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>LogInViewModel</h4>
+
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new {@class = "form-control"})
+                @Html.EditorFor(model => model.Name,new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SurnName, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SurnName, new {@class = "form-control"})
+                @Html.EditorFor(model => model.SurnName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SurnName)
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new {@class = "form-control"})
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password)
             </div>
         </div>
@@ -50,7 +50,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input class="btn btn-success" type="submit" value="Create" class="btn btn-default" />
+                <input class="btn btn-success" type="submit" value="Войти"  />
             </div>
         </div>
     </div>

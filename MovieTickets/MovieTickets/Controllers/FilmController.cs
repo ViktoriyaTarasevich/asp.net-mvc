@@ -21,6 +21,7 @@ namespace MovieTickets.Controllers
 
         //
         // GET: /Admin/
+        [Authorize(Roles = "admin")]
         public ActionResult FilmControl()
         {
             IRepository<Film> repository = _unitOfWork.GetRepository<Film>();

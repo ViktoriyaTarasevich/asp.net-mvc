@@ -9,9 +9,12 @@
         @Styles.Render("~/Content/site")
         @Styles.Render("~/Content/bootstrap")
         @Styles.Render("~/Content/font-awesome")
-
+        
         @Scripts.Render("~/Scripts/jquery")
+        @Scripts.Render("~/Scripts/bootstrap")
+        @Scripts.Render("~/Scripts/bootstrap-filestyle")
         @Scripts.Render("~/Scripts/modernizr")
+        
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -39,7 +42,7 @@
                     
                     @using (Html.BeginForm("FullTextSearch", "Home", FormMethod.Get, new { @class = "input-medium search-query navbar-form navbar-right", @role = "search" }))
                     {
-                        @Html.TextBox("SearchString")
+                        @Html.TextBox("SearchString", "Поиск", new { htmlAttributes = new { @class = "form-control" } })
 
                         <button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-search"></span></button>
                     }
@@ -56,7 +59,6 @@
             </footer>
         </div>
 
-        @Scripts.Render("~/Scripts/bootstrap")
-        <script src="~/Scripts/bootstrap.min.js"> </script>
+        
     </body>
 </html>

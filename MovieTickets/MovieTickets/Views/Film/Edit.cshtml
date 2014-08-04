@@ -5,14 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<script type="text/javascript">
+    $(":file").filestyle({ buttonName: "btn-primary", buttonBefore: true });
+</script>
 
 @using (Html.BeginForm("Edit", "Film", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Film</h4>
+        <h4>@Model.Title</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -28,19 +30,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "textarea" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-           
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.HiddenFor(model => model.Image)
+                <input type="file" class="filestyle" data-buttonBefore="true" 
+                       data-buttonName="btn-primary" name="file" id="file" accept="image/*" 
+                    data-buttonText=" Выберите файл" value="@String.Format("../../Content/Images/"+Model.Image)"/>
             </div>
         </div>
-        <input type="file" name="file" id="file" accept="image/*"  value="@Url.Content("../../Content/Images/"+Model.Image)" />
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-success" />
