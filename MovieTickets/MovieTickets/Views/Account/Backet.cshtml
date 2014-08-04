@@ -41,9 +41,11 @@
                 </td>
            
                 <td>
-                    <a href=@Url.Action("Delete", "Ticket", new {id = item.Id})>Удалить</a>
+                    <a class="btn btn-danger" href=@Url.Action("Delete", "Ticket", new {id = item.Id})>
+                        <i class="fa fa-trash-o fa-lg"></i> Удалить
+                    </a>
 
-               
+
                 </td>
             </tr>
         }
@@ -56,4 +58,4 @@
 
 </table>
 
-<a href=@Url.Action("BuyResult", "Home")>Оплатить</a>
+<a class="btn btn-success" href=@Url.Action("BuyResult", "Home")><i class="fa fa-usd"></i> Оплатить</a>

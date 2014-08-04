@@ -36,6 +36,9 @@ namespace MovieTickets.App_Start
             bundles.Add(new StyleBundle("~/Content/timepicker").Include(
                 "~/Content/bootstrap-timepicker.css",
                 "~/Content/bootstrap-responsive.css"));
+
+            bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
+                "~/Content/font-awesome.css"));
         }
     }
 }

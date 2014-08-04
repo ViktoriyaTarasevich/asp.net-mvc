@@ -9,7 +9,9 @@
 <h2>NewFilm</h2>
 
 <p>
-    @Html.ActionLink("Добавить фильм", "Create")
+    <a class="btn btn-info" href=@Url.Action("Create", "Film")>
+        <i class="fa fa-film"></i> Добавить фильм
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -40,11 +42,18 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Удалить", "Delete", new {id = item.Id})
+                
+                <a class="btn btn-danger" href=@Url.Action("Delete", "Film", new {id = item.Id})>
+                    <i class="fa fa-trash-o fa-lg"></i> Удалить
+                </a>
+                
             </td>
             <td>
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })
-            </td>
+                <a class="btn btn-info" href=@Url.Action("Edit", "Film", new { id = item.Id })>
+                    <i class="fa fa-cog"></i> Редактировать
+                </a>
+
+           </td>
         </tr>
     }
 

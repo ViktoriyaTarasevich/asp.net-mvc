@@ -37,7 +37,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a href=@Url.Action("GetSeance", "Ticket", new {filmId = item.Id})>Купить билет</a>
+                    <a class="btn btn-success" href=@Url.Action("GetSeance", "Ticket", new {filmId = item.Id})><i class="fa fa-ticket"></i> Купить билет</a>
                 </td>
             </tr>
         }
